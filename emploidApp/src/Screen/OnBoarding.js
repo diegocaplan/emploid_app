@@ -8,6 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 const { width: screenWidth } = Dimensions.get("window");
@@ -48,7 +49,7 @@ const OnBoarding = () => {
     <View style={styles.itemContainer}>
       <Image source={item.image} style={styles.itemImage} />
       <View>
-        <Text> {item.title}</Text>
+        <Text style={styles.itemTitle}> {item.title}</Text>
         <Text style={styles.itemDescription}>{item.description}</Text>
       </View>
     </View>
@@ -72,9 +73,10 @@ const OnBoarding = () => {
         />
       </View>
 
-      <TouchableOpacity onPress={navigateToLogin}> 
-        <Text> INGRESAR</Text>
-        </TouchableOpacity>
+      
+      <TouchableOpacity onPress={navigateToLogin} style={styles.roundButton}>
+        <Icon name="arrow-forward" size={24} color="black" />
+      </TouchableOpacity>
     </LinearGradient>
   );
 };
@@ -84,6 +86,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop:screenWidth * 0.3,
+    marginLeft:22
   },
   gradient: {
     flex: 1,
@@ -93,10 +97,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: screenWidth * 0.8,
     height: screenWidth * 0.8,
-    marginHorizontal: 10,
+    marginHorizontal: 9,
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
+
+  },
+  itemTitle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "black",
+    marginBottom: 20,
+    textAlign: "center",
   },
   itemImage: {
     width: "100%",
@@ -107,7 +119,28 @@ const styles = StyleSheet.create({
   itemDescription: {
     fontSize: 18,
     textAlign: "center",
-    color: "white",
+    color: "black",
+  },
+  roundButton: {
+    position: 'absolute',
+    bottom: 30,
+    right: 20,
+    width: 65,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#c30752',
+    fontWeight: 'bold',
   },
 });
 

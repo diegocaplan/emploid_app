@@ -6,7 +6,8 @@ import AuthNavigation from "./AuthStack";
 export default function RootNavigator() {
     return (
       <NavigationContainer>
-        <AuthNavigation/>
+        {/* <AuthNavigation/> */}
+        <MyStack/>
       </NavigationContainer>
     );
   }

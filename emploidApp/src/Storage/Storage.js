@@ -9,7 +9,7 @@ export const handleLogin = ({ user, password, navigation }) => {
         console.log("Datos del usuario guardados en AsyncStorage:", user.data);
         console.log("Inicio de sesión exitoso:", user);
         alert("Inicio de sesión exitoso");
-        navigation.navigate("Form");
+        navigation.navigate("Home");
       })
       .catch((error) => {
         alert("Email o contraseña incorrectos", error);

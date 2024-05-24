@@ -11,7 +11,7 @@ export default function AuthNavigation() {
       <AuthStack.Navigator>
         <AuthStack.Screen name="onBoarding" component={OnBoarding} options={{ headerShown: false }}/>
         <AuthStack.Screen  name="Login"
-        component={LoginScreen}/>
+        component={LoginScreen} options={{ headerShown: false }}/>
       </AuthStack.Navigator>
    
   );
