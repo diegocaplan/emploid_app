@@ -1,10 +1,12 @@
 import React from 'react'
-import { View,Text,StyleSheet} from 'react-native'
-import Picker from '../Components/Picker'
+import { View,Text,StyleSheet, Dimensions,} from 'react-native'
 import Formulario from '../Components/Picker'
+import { ScrollView } from 'react-native-gesture-handler'
 
+const { width: screenWidth } = Dimensions.get("window");
 const FormScreen = () => {
   return (
+    <ScrollView>
    <View style={styles.container}>
    <View style={styles.card}>
     <Text style={styles.title}>Analicemos tu estado de búsqueda laboral</Text>
@@ -22,6 +24,7 @@ const FormScreen = () => {
    </View>
 
     </View> 
+    </ScrollView>
   )
 }
 const styles = StyleSheet.create({
@@ -30,6 +33,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fae3ea',
         justifyContent: 'center', 
         alignItems: 'center',
+      
     },
     title:{
         color:'black',
@@ -58,7 +62,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 }, 
         shadowOpacity: 0.25,     
         shadowRadius: 3.84,    
-        elevation: 5,   
+        elevation: 5,  
+        marginTop: screenWidth * 0.2 
       }
 })
 export default FormScreen

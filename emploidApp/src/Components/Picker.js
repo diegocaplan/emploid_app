@@ -36,7 +36,7 @@ const Formulario = () => {
                 <Text style={styles.optionLabel}>
                   Busco mi primer empleo {"\n"} en IT
                 </Text>
-                <View style={{ marginHorizontal: '20%'}}>
+                <View style={{ marginHorizontal: "20%" }}>
                   <RadioButton value="primera" />
                 </View>
               </View>
@@ -44,15 +44,15 @@ const Formulario = () => {
                 <Text style={styles.optionLabel}>
                   Busco un cambio laboral {"\n"}dentro de IT
                 </Text>
-                <View style={{ marginHorizontal: '19%' }}>
+                <View style={{ marginHorizontal: "19%" }}>
                   <RadioButton value="segunda" />
                 </View>
               </View>
               <View style={styles.option}>
                 <Text style={styles.optionLabel}>
-                Quiero trabajar por cuenta propia
+                  Quiero trabajar por cuenta propia
                 </Text>
-                <View style={{ marginHorizontal: '15%' }}>
+                <View style={{ marginHorizontal: "15%" }}>
                   <RadioButton value="tercera" />
                 </View>
               </View>
@@ -62,11 +62,10 @@ const Formulario = () => {
                 ¿Cuántos CVs enviaste en la última semana?
               </Text>
               <TextInput
-                style={[{ height: 50 }, styles.input]} 
+                style={[{ height: 50 }, styles.input]}
                 onChangeText={handleChange("number")}
                 onBlur={handleBlur("number")}
                 value={values.number}
-                
                 keyboardType="numeric"
               />
 
@@ -76,7 +75,7 @@ const Formulario = () => {
             </View>
             <Text style={styles.title}>Déjanos feedback:</Text>
             <TextInput
-              style={styles.input}
+              style={[{ height: 90 }, styles.input]}
               onChangeText={handleChange("text")}
               onBlur={handleBlur("text")}
               value={values.text}
@@ -112,11 +111,9 @@ const styles = StyleSheet.create({
   },
   groupContainer: {},
   input: {
-    backgroundColor: "white",
-    borderRadius: 10,
-    padding: 20,
+    marginVertical: 10,
     width: "100%",
-    height: "14%",
+
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     color: "black",

@@ -15,7 +15,7 @@ const MyStack = () => {
      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Home" component={MyTabs} />
       <Stack.Screen name="Root" component={HomeScreen} screenOptions={{ headerShown: false }} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} screenOptions={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

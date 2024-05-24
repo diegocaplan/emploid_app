@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -8,7 +15,7 @@ import ProfileScreen from "../Screen/ProfileScreen";
 import FormScreen from "../Screen/Form";
 const Tab = createBottomTabNavigator();
 
-export default function MyTabs() {
+export default function MyTabs({ focused }) {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -17,23 +24,30 @@ export default function MyTabs() {
           left: 0,
           right: 0,
           backgroundColor: "#f35999",
-          borderTopColor: "white",
+
           borderTopWidth: 2,
           paddingTop: 8,
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
         },
         tabBarInactiveTintColor: "#FFFFFF",
-        tabBarActiveTintColor: "#FFDE59",
+        tabBarActiveTintColor: "white",
         tabBarPressColor: "rgba(243, 48, 95, 0.7)",
+        tabBarShowLabel: false,
+        keyboardHidesTabBar: false,
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: () => (
-            <MaterialIcons name="home" color={"black"} size={35} />
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialIcons
+              name="home"
+              color={focused ? "white" : "#c30752"}
+              size={35}
+            />
           ),
         }}
       />
@@ -42,8 +56,13 @@ export default function MyTabs() {
         name="Form"
         component={FormScreen}
         options={{
-          tabBarIcon: () => (
-            <Entypo name="new-message" size={24} color="black" />
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <Entypo
+              name="new-message"
+              size={24}
+              color={focused ? "white" : "#c30752"}
+            />
           ),
         }}
       />
@@ -51,8 +70,13 @@ export default function MyTabs() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarIcon: () => (
-            <MaterialIcons name="person" color={"black"} size={35} />
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialIcons
+              name="person"
+              color={focused ? "white" : "#c30752"}
+              size={35}
+            />
           ),
         }}
       />

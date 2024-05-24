@@ -120,6 +120,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     color: "black",
+    fontStyle: 'italic',
+    textAlign: 'justify'
   },
   roundButton: {
     position: 'absolute',
