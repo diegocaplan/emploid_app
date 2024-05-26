@@ -1,10 +1,15 @@
 import React from "react";
 import { View, Text,StyleSheet } from "react-native";
+import CustomHeader from "../Components/CustomHeader";
+import SubscriptionPlans from "../Components/PlanCard";
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
+    
+   
       <Text> home</Text>
+      <SubscriptionPlans/>
     </View>
   );
 };
