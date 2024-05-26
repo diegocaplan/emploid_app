@@ -1,5 +1,7 @@
 import React from "react";
-import { TextInput, View, StyleSheet } from "react-native";
+import { TextInput, View, StyleSheet, Platform, Dimensions } from "react-native";
+
+const { width } = Dimensions.get('window');
 
 const Input = ({ label, value, onChangeText, secureTextEntry, onBlur }) => {
   return (
@@ -29,8 +31,9 @@ const styles = StyleSheet.create({
     height: 36,
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     color: "white",
-    paddingHorizontal: '10%',
+    paddingHorizontal: width > 400 ? '5%' : '10%', 
     textAlign: "center",
+    fontSize: Platform.OS === 'web' ? 18 : 16, 
   },
 });
 

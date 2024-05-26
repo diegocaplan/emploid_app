@@ -4,7 +4,7 @@ import OnBoarding from "../Screen/OnBoarding";
 import LoginScreen from "../Screen/LoginScreen";
 
 const AuthStack = createStackNavigator();
-
+//hay ttres rolas GRATUITO, BASICO Y PREMIUM
 export default function AuthNavigation() {
   return (
   
