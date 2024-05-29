@@ -1,31 +1,64 @@
 //creo un contexto global en mi aplicacion (seria como un redux en react js) para poder hacer las funciones y
 //pasarse a todos mis componentes sin tener que volver a escribir codigo
 
-// import * as React from "react";
+import * as React from "react";
 
-// const AuthContext = React.createContext({
-//   authState: "default",
-//   setAuthState: () => {},
-//   isLoading: false,
-// });
-// const { Provider } = AuthContext;
+const AuthContext = React.createContext({
+  authState: "default",
+  setAuthState: () => {},
+  isLoading: false,
+  email: "",
+  setEmail: () => {},
+  password: "",
+  setPassword: () => {},
+  login: () => {},
+});
+const { Provider } = AuthContext;
 
-// function AuthProvider({ children }) {
-//   const [authState, setAuthState] = React.useState("default");
-// }
-import React from "react";
+function AuthProvider({ children }) {
+  const [authState, setAuthState] = React.useState("default");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
-const Login = ({ user, password }) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const lowercaseUser = user.toLowerCase();  
-      if (lowercaseUser === "lucia" && password === "1234") {
-        resolve({ data: { name: "Lucia" } });
+  const login = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://localhost:3001/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Tipo de contenido de la solicitud
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setAuthState("authenticated"); // Cambia el estado de autenticación a 'authenticated' si la solicitud es exitosa
       } else {
-        reject({ error: "Email o contraseña incorrectos" });
+        setAuthState("error");
       }
-    }, 1000);
-  });
-};
+    } catch (error) {
+      setAuthState("error");
+    }
+    setIsLoading(false);
+  };
 
-export default Login;
+  return (
+    <Provider
+      value={{
+        authState,
+        setAuthState,
+        isLoading,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        login,
+      }}
+    >
+      {children}
+    </Provider>
+  );
+}
+
+export { AuthProvider, AuthContext };

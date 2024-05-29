@@ -7,20 +7,20 @@ const CustomHeader = () => {
     <View style={styles.header}>
     <View style={styles.element}>
       {/* <FontAwesome name="wpforms" size={24} color="white" /> */}
-      <Text style={styles.title}> Hola; Lucia!</Text>
+      <Text style={styles.title}> IdForIdeas APP</Text>
     </View>
   </View>
   )
 }
 const styles = StyleSheet.create({
-    header: {
-      backgroundColor: "#FCC5D2",
-      height: 140,
-      justifyContent: "center",
-      alignItems: "center",
-      borderBottomLeftRadius: 5,
-      borderBottomRightRadius: 5,
-    },
+  header: {
+    backgroundColor: "#FCC5D2",
+    height:50,
+    justifyContent: "center",
+    alignItems: "center",
+   
+    overflow: 'hidden',
+  },
     element: {
       flexDirection: "row",
       alignItems: "center",
@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: "bold",
       color: "#FFF",
-      marginTop:60,
-   marginStart:-190
+    justifyContent:'center'
+   
     },
   });
 export default CustomHeader
