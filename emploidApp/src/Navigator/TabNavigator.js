@@ -24,7 +24,11 @@ export default function MyTabs({ focused }) {
           left: 0,
           right: 0,
           backgroundColor: "#f35999",
-
+          ...Platform.select({
+            web: {
+             backgroundColor:'#bfbfbf' 
+            }
+          }),
           borderTopWidth: 2,
           paddingTop: 8,
           borderTopLeftRadius: 15,
@@ -90,6 +94,11 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     backgroundColor: "#FCC5D2",
+    ...Platform.select({
+      web: {
+       backgroundColor:'#d6d6c2' 
+      }
+    }),
     borderTopColor: "red",
     borderTopWidth: 2,
     paddingTop: 8,
