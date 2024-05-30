@@ -1,41 +1,37 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import CustomHeader from "../Components/CustomHeader";
 import SubscriptionPlans from "../Components/PlanCard";
+import CustomCard from "../Components/CustomCard";
+import HomeCard from "../Components/HomeCard";
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <CustomHeader />
       <View>
-        <Text> Hola, Lucia!</Text>
+        <CustomCard
+          title="Bienvenido, Lucia!"
+          text="En las próximas 48 hs deberás completar un nuevo Formulario"
+        />
+      </View>
+
+      <View style={{ flex: 1, marginTop: "35%" }}>
+        <HomeCard />
       </View>
     </View>
   );
 };
-{/* <View style={styles.container}>
-<View style={styles.row}>
-  <TouchableOpacity style={styles.card} onPress={() => alert('Ir a Pantalla A')}>
-    <Text style={styles.cardText}>Ir a Pantalla A</Text>
-  </TouchableOpacity>
-  <TouchableOpacity style={styles.card} onPress={() => alert('Ir a Pantalla B')}>
-    <Text style={styles.cardText}>Ir a Pantalla B</Text>
-  </TouchableOpacity>
-</View>
-<View style={styles.row}>
-  <TouchableOpacity style={styles.card} onPress={() => alert('Ir a Pantalla C')}>
-    <Text style={styles.cardText}>Ir a Pantalla C</Text>
-  </TouchableOpacity>
-  <TouchableOpacity style={styles.card} onPress={() => alert('Ir a Pantalla D')}>
-    <Text style={styles.cardText}>Ir a Pantalla D</Text>
-  </TouchableOpacity>
-</View>
-</View> */}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fae3ea",
+    ...Platform.select({
+      web: {
+        backgroundColor: "white",
+      },
+    }),
   },
 });
 export default HomeScreen;
