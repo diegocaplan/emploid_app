@@ -4,6 +4,7 @@ import CustomHeader from "../Components/CustomHeader";
 import SubscriptionPlans from "../Components/PlanCard";
 import CustomCard from "../Components/CustomCard";
 import HomeCard from "../Components/HomeCard";
+import Carousel from "../Components/Carousel";
 
 const HomeScreen = () => {
   return (
@@ -15,8 +16,8 @@ const HomeScreen = () => {
           text="En las próximas 48 hs deberás completar un nuevo Formulario"
         />
       </View>
-
-      <View style={{ flex: 1, marginTop: "35%" }}>
+<Carousel/>
+      <View style={{ flex: 1 }}>
         <HomeCard />
       </View>
     </View>
