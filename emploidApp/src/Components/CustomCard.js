@@ -28,7 +28,7 @@ const CustomCard = ({ title, text }) => {
 const styles = StyleSheet.create({
   card: {
     borderRadius: 8,
-    borderColor: "#bfbfbf",
+    borderColor: "#f35999",
     borderWidth: 1,
     overflow: "hidden",
     margin: 8,

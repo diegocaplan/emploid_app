@@ -26,7 +26,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fae3ea",
+    backgroundColor: "#ffffff",
     ...Platform.select({
       web: {
         backgroundColor: "white",
