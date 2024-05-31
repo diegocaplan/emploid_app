@@ -31,6 +31,8 @@ const MyStack = () => {
          
         />
       )} */}
+
+
          {Platform.OS !== "web" && (
         <Stack.Screen
           name="Home"

@@ -8,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 const { width: screenWidth } = Dimensions.get("window");
@@ -19,29 +19,30 @@ const OnBoarding = () => {
     {
       id: "1",
       image: require("../../assets/marca_personal.png"),
-      title: "Entrevista",
+      title: "Construye una marca personal fuerte en LinkedIn. ",
       description:
-        "Te guiamos para que puedas crear una marca personal el LinkedIn y desarrollar una red de contaxtos valiosas",
+        "Nuestra app te guiará a través de ejercicios diarios para que puedas crear un perfil de LinkedIn atractivo y profesional.",
     },
     {
       id: "2",
       image: require("../../assets/entrevistas.png"),
-      title: "Networking",
+      title: "Networking Efectivo",
       description:
-        "Te enseñamos como mejorar tu red de contsactos y como aplicar a las oportunidades laborales de manera efectiva para destacar",
+        "Conecta con las personas adecuadas y accede a las mejores oportunidades.",
     },
     {
       id: "3",
       image: require("../../assets/networking.png"),
-      title: "Entrevistas",
+      title: "Preparación para Entrevistas",
       description:
-        "Te entrenamos en las habilidades necesarias para destacar en las entrevistas con tus futuros empleadores",
+        "Destaca en cada entrevista y consigue la oferta. Entrénate en las habilidades necesarias para destacar.",
     },
     {
       id: "",
-      image: require("../../assets/networking.png"),
-      title: "Plan ideal para vos",
-      description: " Encuentra el plan ideal para ti y disfruta de beneficios únicos para tu crecimiento profesional",
+      image: require("../../assets/marca_personal.png"),
+      title: "Metas Diarias Claras",
+      description:
+        " Pequeños pasos que te llevarán al éxito. Sabemos que el proceso puede ser abrumador, por eso  con nuestra app tendrás acceso a todo lo necesario para alcanzar la meta",
     },
   ];
 
@@ -55,7 +56,7 @@ const OnBoarding = () => {
     </View>
   );
   const navigateToLogin = () => {
-    navigation.navigate('Login');
+    navigation.navigate("Login");
   };
   return (
     <LinearGradient colors={["#f35999", "#c30752"]} style={styles.gradient}>
@@ -69,11 +70,10 @@ const OnBoarding = () => {
           pagingEnabled
           snapToAlignment="center"
           decelerationRate="fast"
-          snapToInterval={screenWidth * 0.8}
+          snapToInterval={screenWidth * 0.4}
         />
       </View>
 
-      
       <TouchableOpacity onPress={navigateToLogin} style={styles.roundButton}>
         <Icon name="arrow-forward" size={24} color="black" />
       </TouchableOpacity>
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop:screenWidth * 0.3,
-    marginLeft:22
+    marginTop: screenWidth * 0.3,
+    marginLeft: 22,
   },
   gradient: {
     flex: 1,
@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
-
   },
   itemTitle: {
     fontSize: 30,
@@ -115,25 +114,26 @@ const styles = StyleSheet.create({
     height: 250,
     borderRadius: 10,
     marginBottom: 10,
+    marginHorizontal: screenWidth * 0.1, 
   },
   itemDescription: {
     fontSize: 18,
     textAlign: "center",
     color: "black",
-    fontStyle: 'italic',
-    textAlign: 'justify'
+    fontStyle: "italic",
+    textAlign: "justify",
   },
   roundButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 30,
     right: 20,
     width: 65,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
@@ -141,8 +141,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: '#c30752',
-    fontWeight: 'bold',
+    color: "#c30752",
+    fontWeight: "bold",
   },
 });
 
