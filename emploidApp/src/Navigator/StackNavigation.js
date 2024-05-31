@@ -7,6 +7,7 @@ import OnBoarding from "../Screen/OnBoarding";
 import HomeScreen from "../Screen/HomeScreen";
 import MyTabs from "./TabNavigator";
 import ProfileScreen from "../Screen/ProfileScreen";
+import SubscriptionPlans from "../Components/PlanCard";
 
 const Stack = createStackNavigator();
 const MyStack = () => {
@@ -31,7 +32,15 @@ const MyStack = () => {
          
         />
       )} */}
-
+{Platform.OS !== "web" && (
+        <Stack.Screen
+          name="OnBoarding"
+          component={OnBoarding}
+          options={{
+            headerShown: false,
+          }}
+        />
+      )}
 
          {Platform.OS !== "web" && (
         <Stack.Screen
@@ -42,6 +51,7 @@ const MyStack = () => {
       )} 
       <Stack.Screen name="Root" component={HomeScreen} screenOptions={{ headerShown: false }} />
       <Stack.Screen name="Profile" component={ProfileScreen} screenOptions={{ headerShown: false }} />
+      <Stack.Screen name="SubscriptionPlans" component={SubscriptionPlans} />
     </Stack.Navigator>
   );
 };

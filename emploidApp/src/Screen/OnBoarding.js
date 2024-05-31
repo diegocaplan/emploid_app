@@ -32,7 +32,7 @@ const OnBoarding = () => {
     },
     {
       id: "3",
-      image: require("../../assets/networking.png"),
+      image: require("../../assets/marca_personal.png"),
       title: "Preparación para Entrevistas",
       description:
         "Destaca en cada entrevista y consigue la oferta. Entrénate en las habilidades necesarias para destacar.",
