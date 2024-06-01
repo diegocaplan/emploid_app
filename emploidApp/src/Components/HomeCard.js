@@ -3,15 +3,13 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-const CustomCard = ({ title, iconName,onPress }) => {
-  
+const CustomCard = ({ title, iconName, onPress }) => {
   return (
     <View style={styles.card}>
       <TouchableOpacity onPress={onPress}>
@@ -35,37 +33,28 @@ const HomeCard = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView>
-      <SafeAreaView
-        style={{
-          flex: 1,
-          marginTop: 20,
-          marginHorizontal: 10,
-          marginBottom: 10,
-        }}
-      >
-        <View style={styles.row}>
-          <CustomCard
-            title="DESAFÍO DIARIO"
-            iconName="pluscircle"
-            onPress={() => handleNavigation("Screen1")}
-          />
-        </View>
-        <View style={styles.row}>
-          <CustomCard
-            title="MI PROGRESO"
-            iconName="check"
-            onPress={() => handleNavigation("Screen2")}
-          />
-        </View>
-        <View style={styles.row}>
-          <CustomCard
-            title="NUESTROS PLANES"
-            iconName="form"
-            onPress={() => navigation.navigate("SubscriptionPlans")}
-          />
-        </View>
-      </SafeAreaView>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.row}>
+        <CustomCard
+          title="DESAFÍO DIARIO"
+          iconName="pluscircle"
+          onPress={() => handleNavigation("Screen1")}
+        />
+      </View>
+      <View style={styles.row}>
+        <CustomCard
+          title="MI PROGRESO"
+          iconName="check"
+          onPress={() => handleNavigation("Screen2")}
+        />
+      </View>
+      <View style={styles.row}>
+        <CustomCard
+          title="NUESTROS PLANES"
+          iconName="form"
+          onPress={() => navigation.navigate("SubscriptionPlans")}
+        />
+      </View>
     </ScrollView>
   );
 };
@@ -98,7 +87,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: "auto",
-    color: "#cccccc",
+    color: "#1a1a1a",
   },
   image: {
     width: "100%",

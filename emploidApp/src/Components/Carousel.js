@@ -1,5 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Platform,
+  Dimensions,
+} from "react-native";
+const { width, height } = Dimensions.get("window");
 import Swiper from "react-native-swiper";
 import imageJob from "../../assets/job.jpg";
 import imageApp from "../../assets/Apps.jpg";
@@ -40,9 +48,9 @@ const Carousel = () => {
 
 const styles = StyleSheet.create({
   view: {
-    height: "20%",
+    flex: 1,
     marginHorizontal: "18%",
-    marginTop: 15,
+    marginTop: "10%",
   },
   wrapper: {},
   slide: {
