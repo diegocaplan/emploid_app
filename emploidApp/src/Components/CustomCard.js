@@ -1,10 +1,10 @@
 // Importar las librerías necesarias
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity,Platform,Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import imageSource from "../../assets/for.jpg";
-
+const { width,height } = Dimensions.get("window");
 const CustomCard = ({ title, text }) => {
   const navigation = useNavigation();
   const navigateToLogin = () => {
@@ -40,6 +40,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     elevation: 3,
     marginTop: "8%",
+    ...Platform.select({
+     
+      web: {
+        height: height > 1024 ? "80%" : width > 768 ? "60%" : "70%",
+     
+      },
+    }),
   },
   image: {
     width: "40%",
