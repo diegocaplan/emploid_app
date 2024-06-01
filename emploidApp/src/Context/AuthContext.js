@@ -2,7 +2,7 @@
 //pasarse a todos mis componentes sin tener que volver a escribir codigo
 
 import * as React from "react";
-
+import axios from 'axios';
 const AuthContext = React.createContext({
   authState: "default",
   setAuthState: () => {},
@@ -21,19 +21,23 @@ function AuthProvider({ children }) {
   const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
+
+
   const login = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/login", {
-        method: "POST",
+      const response = await axios.post("http://localhost:3001/login", {
+        email,
+        password
+      }, {
         headers: {
-          "Content-Type": "application/json", // Tipo de contenido de la solicitud
-        },
-        body: JSON.stringify({ email, password }),
+          "Content-Type": "application/json" 
+        }
       });
-      const data = await response.json();
+  
+      const data = response.data;
       if (data.success) {
-        setAuthState("authenticated"); // Cambia el estado de autenticación a 'authenticated' si la solicitud es exitosa
+        setAuthState("authenticated");
       } else {
         setAuthState("error");
       }
@@ -42,6 +46,7 @@ function AuthProvider({ children }) {
     }
     setIsLoading(false);
   };
+  
 
   return (
     <Provider

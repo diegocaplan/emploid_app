@@ -32,7 +32,7 @@ const MyStack = () => {
          
         />
       )} */}
-{Platform.OS !== "web" && (
+{/* {Platform.OS !== "web" && (
         <Stack.Screen
           name="OnBoarding"
           component={OnBoarding}
@@ -40,7 +40,7 @@ const MyStack = () => {
             headerShown: false,
           }}
         />
-      )}
+      )} */}
 
          {Platform.OS !== "web" && (
         <Stack.Screen
