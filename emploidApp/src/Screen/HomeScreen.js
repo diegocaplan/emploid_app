@@ -35,6 +35,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
+    backgroundColor:'red'
   },
   viewHome: {
     ...Platform.select({
@@ -47,8 +48,9 @@ const styles = StyleSheet.create({
       web: {
         height: height > 1024 ? "100%" : width > 768 ? "60%" : "70%",
         width: width > 1024 ? "60%" : width > 768 ? "60%" : "70%",
-        marginTop: "10%",
+        marginTop: "8%",
         marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
+     
       },
     }),
   },
@@ -73,11 +75,7 @@ const styles = StyleSheet.create({
     }),
 
     backgroundColor: "#ffffff",
-    ...Platform.select({
-      web: {
-        backgroundColor: "white",
-      },
-    }),
+   
   },
 });
 export default HomeScreen;
