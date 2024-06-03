@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { handleLogin } from "../Storage/Storage";
-// import { Feather } from "@expo/vector-icons";
+ import { Feather } from "@expo/vector-icons";
 import Input from "./Input";
 const { width, height } = Dimensions.get("window");
 
@@ -42,12 +42,23 @@ const SignIn = () => {
             setEmail(text.trim());
           }}
         />
+        <View style={styles.viewPassword}>
         <Input
           label={"Contraseña"}
           value={password}
           onChangeText={setPassword}
           secureTextEntry={!showPassword}
+        
         />
+          <TouchableOpacity onPress={toggleShowPassword} activeOpacity={0.8} style={styles.show}>
+          <Feather
+            name={showPassword ? "eye" : "eye-off"}
+            size={20}
+            color="#b3b3b3"
+          />
+        </TouchableOpacity>
+        </View>
+        
 
         <TouchableOpacity
           style={styles.button}
@@ -87,6 +98,17 @@ const styles = StyleSheet.create({
       },
     }),
   },
+  viewPassword:{
+   flexDirection:'row',
+   alignItems:'center',
+   
+  },
+  show:{
+  
+    marginHorizontal: "85%",
+    position:'absolute',
+    top: 8, 
+  },
   button: {
     borderRadius: 20,
     paddingVertical: 8,
@@ -108,7 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontWeight: "bold",
-    width: 100,
+    
     ...Platform.select({
       web: {
         fontSize: 16,

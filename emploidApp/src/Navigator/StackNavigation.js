@@ -41,6 +41,7 @@ const MyStack = () => {
           }}
         />
       )} */}
+<Stack.Screen name="Login" component={LoginScreen} />
 
          {Platform.OS !== "web" && (
         <Stack.Screen
