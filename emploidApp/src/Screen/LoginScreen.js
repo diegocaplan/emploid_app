@@ -1,11 +1,20 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  Dimensions,
+  Image,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SignIn from "../Components/SignIn";
+import logo from "../../assets/logoId.png";
 const { width, height } = Dimensions.get("window");
 const LoginScreen = () => {
   return (
     <LinearGradient colors={["#f35999", "#c30752"]} style={styles.gradient}>
+      <Image source={logo} style={styles.image} />
       <View style={styles.container}>
         <Text style={styles.text} numberOfLines={2}>
           ¡UN DÍA MÁS CERCA DE{"\n"} CONSEGUIR TRABAJO!
@@ -24,6 +33,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  image: {
+    width: 65,
+    height: 65,
+    resizeMode: "contain",
+    marginTop: "-30%",
+    ...Platform.select({
+      web: {
+        marginTop: "1%",
+        marginBottom: "2%",
+      },
+    }),
+    marginBottom: "10%",
+  },
   container: {
     textAlign: "center",
     ...Platform.select({
@@ -36,7 +58,7 @@ const styles = StyleSheet.create({
             : width > 768
             ? "50%"
             : "70%",
-        marginTop: height > 800 ? "-5%" : "0%",
+        marginTop: "-8%",
       },
       default: {
         width: width > 400 ? "70%" : "90%",
@@ -64,6 +86,9 @@ const styles = StyleSheet.create({
   },
   signInContainer: {
     width: "100%",
+    ...Platform.select({
+      web: { width: "80%", marginHorizontal: 40 },
+    }),
   },
 });
 
