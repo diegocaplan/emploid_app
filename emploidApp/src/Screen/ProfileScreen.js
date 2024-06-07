@@ -92,38 +92,37 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   scrollView: {
-    width: "100%",
-    paddingLeft: 50,
+    width: "97%",
+   
   },
   iconsContainer: {
     justifyContent: "center",
-
-    width: "90%",
+    
+    borderColor: "black",
+    borderWidth: 0.5,
+    width: "100%",
   },
   label: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "bold",
     color: "#333",
     marginTop: 8,
   },
   name: {
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: "bold",
     color: "#1e90ff",
     marginTop: 5,
   },
 
   icon: {
-    flex: 1,
+    height:'19%',
     padding: 20,
-    margin: 5,
+    margin: 3,
     backgroundColor: "#fff",
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 2,
+    borderRadius:3,
+    borderColor: "black",
+    borderWidth: 0.2,
     alignItems: "center",
   },
 });
