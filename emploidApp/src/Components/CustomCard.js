@@ -18,7 +18,7 @@ const { width, height } = Dimensions.get("window");
 const CustomCard = ({ title, text }) => {
   const navigation = useNavigation();
   const navigateToLogin = () => {
-    navigation.navigate("Profile");
+    navigation.navigate("Formulario");
   };
   return (
     <View style={styles.card}>

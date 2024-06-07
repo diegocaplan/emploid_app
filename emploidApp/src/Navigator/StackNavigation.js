@@ -8,6 +8,7 @@ import HomeScreen from "../Screen/HomeScreen";
 import MyTabs from "./TabNavigator";
 import ProfileScreen from "../Screen/ProfileScreen";
 import SubscriptionPlans from "../Components/PlanCard";
+import TaskList from "../Components/TaskList";
 
 const Stack = createStackNavigator();
 const MyStack = () => {
@@ -41,7 +42,7 @@ const MyStack = () => {
           }}
         />
       )} */}
-<Stack.Screen name="Login" component={LoginScreen} />
+
 
          {Platform.OS !== "web" && (
         <Stack.Screen
@@ -51,8 +52,10 @@ const MyStack = () => {
         />
       )} 
       <Stack.Screen name="Root" component={HomeScreen} screenOptions={{ headerShown: false }} />
+      <Stack.Screen name="Formulario" component={FormScreen} screenOptions={{ headerShown: false }} />
       <Stack.Screen name="Profile" component={ProfileScreen} screenOptions={{ headerShown: false }} />
       <Stack.Screen name="SubscriptionPlans" component={SubscriptionPlans} />
+      <Stack.Screen name="TaskList" component={TaskList} />
     </Stack.Navigator>
   );
 };

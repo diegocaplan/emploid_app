@@ -38,7 +38,7 @@ const HomeCard = () => {
         <CustomCard
           title="DESAFÍO DIARIO"
           iconName="pluscircle"
-          onPress={() => handleNavigation("Screen1")}
+          onPress={() => navigation.navigate("TaskList")}
         />
       </View>
       <View style={styles.row}>
@@ -50,8 +50,8 @@ const HomeCard = () => {
       </View>
       <View style={styles.row}>
         <CustomCard
-          title="NUESTROS PLANES"
-          iconName="form"
+          title="VER PLANES"
+          iconName="shoppingcart"
           onPress={() => navigation.navigate("SubscriptionPlans")}
         />
       </View>
