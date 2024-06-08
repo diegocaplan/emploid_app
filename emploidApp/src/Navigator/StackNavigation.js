@@ -13,8 +13,8 @@ import TaskList from "../Components/TaskList";
 const Stack = createStackNavigator();
 const MyStack = () => {
   return (
-    <Stack.Navigator   screenOptions={{ headerShown: false }}>
-     {/* {Platform.OS !== "web" && (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {Platform.OS !== "web" && (
         <Stack.Screen
           name="OnBoarding"
           component={OnBoarding}
@@ -23,41 +23,32 @@ const MyStack = () => {
           }}
         />
       )}
-     <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
 
+     
 
-         {Platform.OS !== "web" && (
-        <Stack.Screen
-          name="Home"
-          component={MyTabs}
-         
-        />
-      )} */}
-{/* {Platform.OS !== "web" && (
-        <Stack.Screen
-          name="OnBoarding"
-          component={OnBoarding}
-          options={{
-            headerShown: false,
-          }}
-        />
-      )} */}
-
-
-         {Platform.OS !== "web" && (
-        <Stack.Screen
-          name="Home"
-          component={MyTabs}
-         
-        />
-      )} 
-      <Stack.Screen name="Root" component={HomeScreen} screenOptions={{ headerShown: false }} />
-      <Stack.Screen name="Formulario" component={FormScreen} screenOptions={{ headerShown: false }} />
-      <Stack.Screen name="Profile" component={ProfileScreen} screenOptions={{ headerShown: false }} />
+      {Platform.OS !== "web" && 
+      <Stack.Screen name="Home" component={MyTabs} />}
+     
+      <Stack.Screen
+        name="Root"
+        component={HomeScreen}
+        screenOptions={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Formulario"
+        component={FormScreen}
+        screenOptions={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        screenOptions={{ headerShown: false }}
+      />
       <Stack.Screen name="SubscriptionPlans" component={SubscriptionPlans} />
       <Stack.Screen name="TaskList" component={TaskList} />
     </Stack.Navigator>
   );
 };
 
-export default MyStack ;
+export default MyStack;
