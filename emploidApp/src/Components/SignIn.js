@@ -62,7 +62,8 @@ const SignIn = () => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={login}
+          // onPress={login}
+          onPress={() =>navigation.navigate('Home')}
           disabled={isLoading}
         >
           <Text style={styles.buttonText}>INGRESAR</Text>

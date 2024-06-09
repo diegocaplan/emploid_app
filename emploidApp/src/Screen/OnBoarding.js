@@ -32,14 +32,14 @@ const OnBoarding = () => {
     },
     {
       id: "3",
-      image: require("../../assets/marca_personal.png"),
+      image: require("../../assets/empleo.png"),
       title: "Preparación para Entrevistas",
       description:
         "Destaca en cada entrevista y consigue la oferta. Entrénate en las habilidades necesarias para destacar.",
     },
     {
       id: "",
-      image: require("../../assets/marca_personal.png"),
+      image: require("../../assets/entrevistas.png"),
       title: "Metas Diarias Claras",
       description:
         " Pequeños pasos que te llevarán al éxito. Sabemos que el proceso puede ser abrumador, por eso  con nuestra app tendrás acceso a todo lo necesario para alcanzar la meta",
