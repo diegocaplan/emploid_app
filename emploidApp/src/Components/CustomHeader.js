@@ -1,13 +1,44 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { View, Text, StyleSheet, Image,TouchableOpacity,Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import logo from "../../assets/logoId.png";
+
 const CustomHeader = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.header}>
+        {Platform.OS === 'web' && (
+        <View style={styles.iconContainer}>
+          <TouchableOpacity style={styles.icon} onPress={()=> navigation.navigate('Root')}>
+          <MaterialIcons
+              name="home"
+              color={"#c30752"}
+              size={30}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.icon} onPress={()=> navigation.navigate('Formulario')}>
+          <Entypo
+              name="new-message"
+              size={23}
+              color={"#c30752"}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.icon} onPress={()=> navigation.navigate('Profile')}>
+          <MaterialIcons
+              name="person"
+              color={"#c30752"}
+              size={30}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
       <View style={styles.element}>
         <Image source={logo} style={styles.image} />
+
       </View>
+    
     </View>
   );
 };
@@ -19,6 +50,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     overflow: "hidden",
+  },
+  iconContainer: {
+    position: 'fixed',
+    right: 0,
+   
+  marginHorizontal:5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    zIndex: 999, 
+  },
+  icon: {
+    marginHorizontal: 5, 
   },
   element: {
     flexDirection: "row",

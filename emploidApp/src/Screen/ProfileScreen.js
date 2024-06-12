@@ -1,47 +1,153 @@
-import React from "react";
+import React, { useState } from "react";
+
 import {
   View,
   Text,
   StyleSheet,
   Image,
+  TextInput,
   TouchableOpacity,
   ScrollView,
+  Platform,
+  Dimensions,
 } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import CustomHeader from "../Components/CustomHeader";
 
+const { width, height } = Dimensions.get("window");
 const ProfileScreen = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [profileData, setProfileData] = useState({
+    name: "",
+    job: "",
+    linkedin: "",
+    discord: "",
+    plan: "",
+  });
+
+  const handleSave = async () => {
+    // console.log(handleSave)
+    // setIsLoading(true);
+    // try {
+    //   const response = await axios.post(
+    //     "https://your-backend-url.com/api/profile",
+    //     profileData,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   if (response.status !== 200) {
+    //     throw new Error("Error en actualizar la información");
+    //   }
+    //   alert("Cambios guardados con éxito");
+    //   setProfileData(response.data);
+    //   console.log(response.data)
+    // } catch (error) {
+    //   console.error("error de guardado", error);
+    //   alert("Error al actualizar la información");
+    // } finally {
+    //   setIsLoading(false);
+    // }
+  };
+
   return (
     <>
       <CustomHeader />
       <View style={styles.container}>
         <View style={styles.avatarContainer}>
           <Image
-            source={require("../../assets/33.jpg")}
+            source={require("../../assets/no_user.png")}
             style={styles.avatar}
           />
         </View>
-        <ScrollView style={styles.scrollView}>
-          <View style={styles.iconsContainer}>
-            <View style={styles.icon}>
-              <Text style={styles.label}> NOMBRE</Text>
-              <Text style={styles.profession}>Lucia</Text>
+        <ScrollView
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.form}>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>NOMBRE</Text>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  value={profileData.name}
+                  onChangeText={(text) =>
+                    setProfileData({ ...profileData, name: text })
+                  }
+                  placeholder="Ingresa tu nombre"
+                  placeholderTextColor="#666"
+                />
+                <Icon name="edit" size={20} color="#333" style={styles.icon} />
+              </View>
             </View>
-            <View style={styles.icon}>
-              <Text style={styles.label}> JOB</Text>
-              <Text style={styles.profession}>Mobil Developer</Text>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>JOB</Text>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  value={profileData.job}
+                  onChangeText={(text) =>
+                    setProfileData({ ...profileData, job: text })
+                  }
+                  placeholder="Ingresa tu profesión"
+                  placeholderTextColor="#666"
+                />
+                <Icon name="edit" size={20} color="#333" style={styles.icon} />
+              </View>
             </View>
-            <View style={styles.icon}>
-              <Text style={styles.label}> LINKEDIN</Text>
-              <Text style={styles.profession}>Lucostamagna</Text>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>LINKEDIN</Text>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  value={profileData.linkedin}
+                  onChangeText={(text) =>
+                    setProfileData({ ...profileData, linkedin: text })
+                  }
+                  placeholder="Ingresa tu usuario de LinkedIn"
+                  placeholderTextColor="#666"
+                />
+                <Icon name="edit" size={20} color="#333" style={styles.icon} />
+              </View>
             </View>
-            <View style={styles.icon}>
-              <Text style={styles.label}> DISCORD</Text>
-              <Text style={styles.profession}>Lucostamagna</Text>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>DISCORD</Text>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  value={profileData.discord}
+                  onChangeText={(text) =>
+                    setProfileData({ ...profileData, discord: text })
+                  }
+                  placeholder="Ingresa tu usuario de Discord"
+                  placeholderTextColor="#666"
+                />
+                <Icon name="edit" size={20} color="#333" style={styles.icon} />
+              </View>
             </View>
-            <View style={styles.icon}>
-              <Text style={styles.label}> PLAN ACTIVO</Text>
-              <Text style={styles.profession}>Basic Plan</Text>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>PLAN ACTIVO</Text>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  value={profileData.plan}
+                  onChangeText={(text) =>
+                    setProfileData({ ...profileData, plan: text })
+                  }
+                  placeholder=""
+                  placeholderTextColor="#666"
+                />
+                <Icon name="edit" size={20} color="#333" style={styles.icon} />
+              </View>
             </View>
+            <TouchableOpacity style={styles.buttonOut}>
+              <Text style={styles.textOut}>Cerrar sesión</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleSave}>
+              <Text style={styles.buttonText}>Actualizar</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
@@ -51,79 +157,110 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
+    ...Platform.select({
+      ios: {
+        flex: 1,
+      },
+      android: {
+        flex: 1,
+      },
+      web: {
+        height: height > 1024 ? "100%" : width > 768 ? "60%" : "70%",
+        width: width > 1024 ? "60%" : width > 768 ? "60%" : "70%",
+        marginTop: "2%",
+        marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
+      },
+    }),
+    backgroundColor: "#FFF",
     alignItems: "center",
   },
   avatarContainer: {
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 20,
-    marginTop: "15%",
-    backgroundColor: "#F8F9F9",
+    marginTop: "10%",
+    backgroundColor: "#f2f2f2",
+    ...Platform.select({
+      web: {
+        backgroundColor: "#fff4e6",
+      },
+    }),
     width: "100%",
     height: "30%",
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
   },
   avatar: {
     width: 130,
     height: 130,
-    borderRadius: 70,
-    marginRight: 20,
-    borderColor: "black",
-    borderWidth: 2,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  userInfo: {
-    justifyContent: "center",
-    marginBottom: 20,
-    marginTop: "5%",
-    alignItems: "center",
-    backgroundColor: "red",
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 5,
-  },
-  profession: {
-    fontSize: 14,
-    color: "#333",
-    marginTop: 5,
+    borderRadius: 65,
+    borderColor: "#ddd",
+    borderWidth: 1,
   },
   scrollView: {
-    width: "97%",
-   
-  },
-  iconsContainer: {
-    justifyContent: "center",
-    
-    borderColor: "black",
-    borderWidth: 0.5,
     width: "100%",
   },
+  form: {
+    padding: 20,
+    backgroundColor: "#fff",
+
+    elevation: 3,
+    ...Platform.select({
+      web: {
+        height: "90vh",
+        maxHeight: "100%",
+      },
+    }),
+  },
+  inputContainer: {
+    marginBottom: 20,
+  },
   label: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#333",
-    marginTop: 8,
+    marginBottom: 5,
   },
-  name: {
-    fontSize: 13,
-    fontWeight: "bold",
-    color: "#1e90ff",
-    marginTop: 5,
-  },
-
-  icon: {
-    height:'19%',
-    padding: 20,
-    margin: 3,
-    backgroundColor: "#fff",
-    borderRadius:3,
-    borderColor: "black",
-    borderWidth: 0.2,
+  inputWrapper: {
+    flexDirection: "row",
     alignItems: "center",
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    backgroundColor: "transparent",
+    color: "#333",
+  },
+  icon: {
+    marginLeft: 10,
+  },
+  button: {
+    backgroundColor: "#FCC5D2",
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    ...Platform.select({
+      web: {
+        backgroundColor: "#FCC5D2",
+        padding: 5,
+        width: "30vh",
+
+        alignSelf: "center",
+      },
+    }),
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  buttonOut: {
+    marginBottom: "10%",
+  },
+  textOut: {
+    color: "red",
+    fontSize: 15,
   },
 });
 

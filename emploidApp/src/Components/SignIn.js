@@ -7,10 +7,11 @@ import {
   Platform,
   TouchableOpacity,
   Dimensions,
+  Linking,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { handleLogin } from "../Storage/Storage";
- import { Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import Input from "./Input";
 const { width, height } = Dimensions.get("window");
 
@@ -42,7 +43,9 @@ const SignIn = () => {
             setEmail(text.trim());
           }}
         />
-        <View style={styles.viewPassword}>
+
+        {/* <View style={styles.viewPassword}>
+        //CONTRASEÑA
         <Input
           label={"Contraseña"}
           value={password}
@@ -57,13 +60,12 @@ const SignIn = () => {
             color="#b3b3b3"
           />
         </TouchableOpacity>
-        </View>
-        
+        </View> */}
 
         <TouchableOpacity
           style={styles.button}
           // onPress={login}
-          onPress={() =>navigation.navigate('Home')}
+          onPress={() => navigation.navigate("Home")}
           disabled={isLoading}
         >
           <Text style={styles.buttonText}>INGRESAR</Text>
@@ -72,14 +74,25 @@ const SignIn = () => {
 
         <View style={styles.row}>
           <Text style={styles.question}> ¿Aún no tienes cuenta?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL("https://idforideas.com/emploid/")}
+          >
             <Text style={styles.text}> Suscríbete aquí</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.forgotPasswordContainer}>
-          <TouchableOpacity>
+          <Text style={styles.password}>
+            Por consultas contactarse a{" "}
+            <Text
+              style={styles.link}
+              onPress={() => Linking.openURL("mailto:diego@idforideas.com")}
+            >
+              diego@idforideas.com
+            </Text>
+          </Text>
+          {/* <TouchableOpacity>
             <Text style={styles.password}>¿Olvidaste tu contraseña?</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </React.Fragment>
@@ -99,16 +112,14 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  viewPassword:{
-   flexDirection:'row',
-   alignItems:'center',
-   
+  viewPassword: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  show:{
-  
+  show: {
     marginHorizontal: "85%",
-    position:'absolute',
-    top: 8, 
+    position: "absolute",
+    top: 8,
   },
   button: {
     borderRadius: 20,
@@ -131,7 +142,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontWeight: "bold",
-    
+
     ...Platform.select({
       web: {
         fontSize: 16,
@@ -172,7 +183,12 @@ const styles = StyleSheet.create({
   password: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 15,
+    textAlign: "center",
+  },
+  link: {
+    color: "blue",
+    textDecorationLine: "underline",
   },
 });
 export default SignIn;

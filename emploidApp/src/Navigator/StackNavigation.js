@@ -9,6 +9,7 @@ import MyTabs from "./TabNavigator";
 import ProfileScreen from "../Screen/ProfileScreen";
 import SubscriptionPlans from "../Components/PlanCard";
 import TaskList from "../Components/TaskList";
+import MyProgress from "../Components/MyProgress";
 
 const Stack = createStackNavigator();
 const MyStack = () => {
@@ -47,6 +48,7 @@ const MyStack = () => {
       />
       <Stack.Screen name="SubscriptionPlans" component={SubscriptionPlans} />
       <Stack.Screen name="TaskList" component={TaskList} />
+      <Stack.Screen name="MyProgress" component={MyProgress} />
     </Stack.Navigator>
   );
 };

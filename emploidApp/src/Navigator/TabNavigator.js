@@ -42,7 +42,7 @@ export default function MyTabs({ focused }) {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Root"
         component={HomeScreen}
         options={{
           headerShown: false,
