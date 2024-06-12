@@ -52,9 +52,10 @@ const styles = StyleSheet.create({
     marginTop: "8%",
     ...Platform.select({
       web: {
-        height: height > 1024 ? "80%" : width > 768 ? "50%" : "70%",
+        height: height > 1024 ? "100%" : width > 768 ? "50%" : "70%",
         width: width > 1024 ? "60%" : width > 768 ? "70%" : "90%",
         marginHorizontal: "20%",
+      
        
       },
     }),

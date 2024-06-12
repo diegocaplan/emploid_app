@@ -14,13 +14,14 @@ const CustomCard = ({ title, iconName, onPress }) => {
     <View style={styles.card}>
       <TouchableOpacity onPress={onPress}>
         <View style={styles.cardIcon}>
+         
+          <Text style={styles.title}>{title}</Text>
           <AntDesign
             name={iconName}
             size={30}
             color="black"
             style={styles.icon}
           />
-          <Text style={styles.title}>{title}</Text>
         </View>
 
         <View style={styles.content}></View>
@@ -33,7 +34,7 @@ const HomeCard = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+  <ScrollView>
       <View style={styles.row}>
         <CustomCard
           title="DESAFÍO DIARIO"
@@ -45,17 +46,17 @@ const HomeCard = () => {
         <CustomCard
           title="MI PROGRESO"
           iconName="check"
-          onPress={() => handleNavigation("Screen2")}
+          onPress={() => handleNavigation("MyProgress")}
         />
       </View>
       <View style={styles.row}>
         <CustomCard
           title="VER PLANES"
           iconName="shoppingcart"
-          onPress={() => navigation.navigate("SubscriptionPlans")}
+          onPress={() => navigation.navigate("Profile")}
         />
       </View>
-    </ScrollView>
+      </ScrollView>
   );
 };
 const styles = StyleSheet.create({
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
   },
   icon: {
-    marginRight: "auto",
+    marginLeft: "auto",
     color: "#1a1a1a",
   },
   image: {
