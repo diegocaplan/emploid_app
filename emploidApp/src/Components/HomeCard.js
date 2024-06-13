@@ -53,7 +53,7 @@ const HomeCard = () => {
         <CustomCard
           title="VER PLANES"
           iconName="shoppingcart"
-          onPress={() => navigation.navigate("Profile")}
+          onPress={() => navigation.navigate("SubscriptionPlans")}
         />
       </View>
       </ScrollView>
