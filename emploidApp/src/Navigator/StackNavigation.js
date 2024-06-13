@@ -49,6 +49,7 @@ const MyStack = () => {
       <Stack.Screen name="SubscriptionPlans" component={SubscriptionPlans} />
       <Stack.Screen name="TaskList" component={TaskList} />
       <Stack.Screen name="MyProgress" component={MyProgress} />
+     
     </Stack.Navigator>
   );
 };
