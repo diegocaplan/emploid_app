@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList,Platform,Dimensions } from 'react-native';
 import CustomHeader from './CustomHeader';
-
+import { AntDesign } from '@expo/vector-icons';
+const { width, height } = Dimensions.get("window");
 const TaskList = () => {
   const initialTasks = [
     { id: '1', text: 'Leer sobre buenas prácticas en programación', completed: false },
@@ -85,21 +86,22 @@ const TaskList = () => {
         data={tips}
         renderItem={renderTip}
         keyExtractor={(item, index) => index.toString()}
-        ListHeaderComponent={<Text style={styles.sectionTitle}>Recorda!</Text>}
+        ListHeaderComponent={<Text style={styles.sectionTitle}>Tips para tener en cuenta...</Text>}
       />
 
       <FlatList
         data={tasks}
         renderItem={renderTask}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<Text style={styles.sectionTitle}>Tareas del día.</Text>}
+        ListHeaderComponent={<Text style={styles.sectionTitle}>A REALIZAR:</Text>}
       />
 
       {allTasksCompleted && (
         <View style={styles.unlockContainer}>
           {isToday(currentDate) ? (
             <View style={styles.tomorrow}>
-   <Text style={styles.unlockText}>Mañana se activará el próximo contenido</Text>
+   <Text style={styles.unlockText}>Bien hecho! Mañana se activarán nuevas tareas.</Text>
+   <AntDesign name="checkcircleo" size={24} color="black" />
             </View>
          
           ) : (
@@ -116,24 +118,41 @@ const TaskList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    ...Platform.select({
+      ios: {
+        flex: 1,
+      },
+      android: {
+        flex: 1,
+      },
+      web: {
+        height: height > 1024 ? "55%" : width > 768 ? "60%" : "60%",
+        width: width > 1024 ? "60%" : width > 768 ? "60%" : "70%",
+        marginTop: "2%",
+        marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
+      },
+    }),
     justifyContent: 'center',
     paddingTop: 50,
     paddingHorizontal: 20,
     backgroundColor: 'white',
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 15,
+    fontSize: 20,
+    fontWeight:'500',
+    marginBottom: 10,
     textAlign: 'center',
+    textDecorationLine:'underline',
+    color:"#fc8080",
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight:'400',
     marginBottom: 10,
     marginTop: 20,
     textAlign: 'left',
+    textDecorationLine:'underline',
+   
   },
   taskItem: {
     padding: 20,
@@ -177,12 +196,16 @@ const styles = StyleSheet.create({
   },
   unlockContainer: {
     marginTop: 20,
+    marginBottom:10,
+   backgroundColor:'#fc8080',
     alignItems: 'center',
+   borderRadius:5
   },
   unlockText: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
+   
   },
   unlockButton: {
     backgroundColor: '#4CAF50',
@@ -205,7 +228,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 3,
     borderRadius: 10,
-    backgroundColor: '#fff4e6',
+    flexDirection: "row",
     textAlign: 'center', 
   }
 });

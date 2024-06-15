@@ -7,34 +7,36 @@ import CustomHeader from "../Components/CustomHeader";
 const { width, height } = Dimensions.get("window");
 const FormScreen = () => {
   return (
-   <>
+    <>
       <CustomHeader />
       <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-        <View style={styles.card}>
-          <Text style={styles.title}>
-            Analicemos tu estado de búsqueda laboral
-          </Text>
-          <View style={{ marginTop: "5%" }}>
-            <Text style={styles.heading}>
-              ¿Por qué completar el formulario?
+        <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.card}>
+            <Text style={styles.title}>
+              Analicemos tu estado de búsqueda laboral
             </Text>
-            <View style={{ width: "94%" }}>
-              <Text style={styles.normalText}>
-                {" "}
-                Esta información nos ayuda entender tus objetivos y tu progreso
-                en la búsqueda de nuevas oportunidades. Son métricas para
-                analizar tus avances y poder realizar un seguimiento.
+            <View style={{ marginTop: "5%" }}>
+              <Text style={styles.heading}>
+                ¿Por qué completar el formulario?
               </Text>
-            </View>
+              <View style={{ width: "94%" }}>
+                <Text style={styles.normalText}>
+                  {" "}
+                  Esta información nos ayuda entender tus objetivos y tu
+                  progreso en la búsqueda de nuevas oportunidades. Son métricas
+                  para analizar tus avances y poder realizar un seguimiento.
+                </Text>
+              </View>
 
-            <Formulario />
-         
+              <Formulario />
+            </View>
           </View>
-        </View>
         </ScrollView>
       </View>
-      </>
+    </>
   );
 };
 const styles = StyleSheet.create({
@@ -52,11 +54,12 @@ const styles = StyleSheet.create({
         flex: 1,
       },
       web: {
-        height: height > 1024 ? "30%" : width > 768 ? "40%" : "70%" ,
+        height: height > 1024 ? "80%" : width > 768 ? "30%" : "70%",
         width: width > 1024 ? "60%" : width > 768 ? "60%" : "70%",
-        height: height >= 600 ? '40%' : width > 768 ? "60%" : "70%",
+        height: height >= 600 ? "40%" : width > 768 ? "60%" : "70%",
+
         marginTop: "2%",
-      
+
         marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
       },
     }),
