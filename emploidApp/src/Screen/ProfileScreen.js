@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import {
   View,
@@ -11,11 +11,14 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
+import { AuthContext } from "../Context/AuthContext";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import CustomHeader from "../Components/CustomHeader";
 
 const { width, height } = Dimensions.get("window");
+
 const ProfileScreen = () => {
+  const {logout}= useContext(AuthContext)
   const [isLoading, setIsLoading] = useState(true);
   const [profileData, setProfileData] = useState({
     name: "",
@@ -142,7 +145,7 @@ const ProfileScreen = () => {
                 <Icon name="edit" size={20} color="#333" style={styles.icon} />
               </View>
             </View>
-            <TouchableOpacity style={styles.buttonOut}>
+            <TouchableOpacity style={styles.buttonOut}  onPress={logout}>
               <Text style={styles.textOut}>Cerrar sesión</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleSave}>

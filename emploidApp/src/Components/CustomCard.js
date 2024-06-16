@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
       web: {
         height: height > 1024 ? "100%" : width > 768 ? "50%" : "70%",
         width: width > 1024 ? "60%" : width > 768 ? "70%" : "90%",
-        marginHorizontal: "20%",
+        marginHorizontal: "auto",
       
        
       },
@@ -107,6 +107,10 @@ const styles = StyleSheet.create({
     }),
     color: "#444",
   },
+  roundButton:{
+    marginTop:5,
+    marginBottom:5
+  }
 });
 
 export default CustomCard;

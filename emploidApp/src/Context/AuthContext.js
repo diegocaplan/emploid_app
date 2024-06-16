@@ -2,41 +2,56 @@
 //pasarse a todos mis componentes sin tener que volver a escribir codigo
 
 import * as React from "react";
-import axios from 'axios';
+import axios from "axios";
 const AuthContext = React.createContext({
   authState: "default",
   setAuthState: () => {},
   isLoading: false,
   email: "",
   setEmail: () => {},
-  password: "",
-  setPassword: () => {},
+  // password: "",
+  // setPassword: () => {},
   login: () => {},
+  logout: () => {},
 });
 const { Provider } = AuthContext;
 
 function AuthProvider({ children }) {
   const [authState, setAuthState] = React.useState("default");
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  // const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-
+  //OBTENER TOKEN SI EXISTE
+  React.useEffect(() => {
+    const loadToken = async () => {
+      const token = await AsyncStorage.getItem("token");
+      if (token) {
+        setAuthState("authenticated");
+      }
+    };
+    loadToken();
+  }, []);
 
   const login = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:3001/login", {
-        email,
-        password
-      }, {
-        headers: {
-          "Content-Type": "application/json" 
+      const response = await axios.post(
+        "http://localhost:3001/login",
+        {
+          email,
+          // password
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
-  
+      );
+
       const data = response.data;
-      if (data.success) {
+      if (data.success && data.token) {
+        await AsyncStorage.setItem("token", data.token);
         setAuthState("authenticated");
       } else {
         setAuthState("error");
@@ -46,8 +61,11 @@ function AuthProvider({ children }) {
     }
     setIsLoading(false);
   };
-  
 
+  const logout = async () => {
+    await AsyncStorage.removeItem("token");
+    setAuthState("default");
+  };
   return (
     <Provider
       value={{
@@ -56,9 +74,10 @@ function AuthProvider({ children }) {
         isLoading,
         email,
         setEmail,
-        password,
-        setPassword,
+        // password,
+        // setPassword,
         login,
+        logout,
       }}
     >
       {children}

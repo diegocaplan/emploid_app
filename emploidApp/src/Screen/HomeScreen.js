@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
         flex: 1,
       },
       web: {
-        height: height > 1024 ? "100%" : width > 768 ? "60%" : "70%",
+        height: height > 1024 ? "160%" : width > 768 ? "60%" : "70%",
         width: width > 1024 ? "60%" : width > 768 ? "60%" : "70%",
-        marginTop: "2%",
+        marginTop: "1%",
         marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
-        
+       
      
       },
     }),
