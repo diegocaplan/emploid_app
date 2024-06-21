@@ -67,11 +67,7 @@ const SubscriptionPlans = () => {
   return (
     <>
       <CustomHeader />
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Icon name="arrow-back" size={24} color="#000" />
-        </TouchableOpacity>
-      </View>
+    
       <View style={styles.container}>
         <FlatList
           data={plans}
@@ -103,10 +99,10 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
       },
       web: {
-        height: height > 1024 ? "30%" : width > 768 ? "60%" : "80%",
+        height: height > 1024 ? "30%" : width > 768 ? "65%" : "80%",
         width: width > 1024 ? "60%" : width > 768 ? "60%" : "70%",
         // height: height >= 600 ? '40%' : width > 768 ? "60%" : "70%",
-
+marginTop:20,
         marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
       },
     }),

@@ -25,7 +25,7 @@ const ProfileScreen = () => {
     job: "",
     linkedin: "",
     discord: "",
-    plan: "",
+    plan: "Plan Free",
   });
 
   const handleSave = async () => {
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     }),
   },
   buttonText: {
-    color: "#fff",
+    color: "black",
     fontWeight: "bold",
   },
   buttonOut: {
