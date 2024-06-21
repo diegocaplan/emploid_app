@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Platform
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
@@ -34,7 +35,7 @@ const HomeCard = () => {
   const navigation = useNavigation();
 
   return (
-  <ScrollView>
+  <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.row}>
         <CustomCard
           title="DESAFÍO DIARIO"
@@ -46,7 +47,7 @@ const HomeCard = () => {
         <CustomCard
           title="MI PROGRESO"
           iconName="check"
-          onPress={() => handleNavigation("MyProgress")}
+          onPress={() => navigation.navigate("MyProgress")}
         />
       </View>
       <View style={styles.row}>
@@ -71,6 +72,11 @@ const styles = StyleSheet.create({
     margin: 10,
 
     backgroundColor: "#F8F9F9",
+    ...Platform.select({
+      web: {
+        backgroundColor: "#e6e6e6",
+      },
+    }),
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,

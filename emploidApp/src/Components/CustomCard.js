@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     ...Platform.select({
       web: {
-        fontSize: 21,
+        fontSize: 19,
       },
     }),
   },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     ...Platform.select({
       web: {
-        fontSize: 18,
+        fontSize: 16,
       },
     }),
     color: "#444",

@@ -3,7 +3,15 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList,Platform,Dimensions 
 import CustomHeader from './CustomHeader';
 import { AntDesign } from '@expo/vector-icons';
 const { width, height } = Dimensions.get("window");
+
+
 const TaskList = () => {
+  
+  const [tasks, setTasks] = useState(initialTasks);
+  const [tips, setTips] = useState(initialTips);
+  const [allTasksCompleted, setAllTasksCompleted] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
   const initialTasks = [
     { id: '1', text: 'Leer sobre buenas prácticas en programación', completed: false },
     { id: '2', text: 'Implementar un patrón de diseño', completed: false },
@@ -16,12 +24,6 @@ const TaskList = () => {
     'Usa nombres significativos para variables y funciones.',
     'Comenta tu código de forma clara y concisa.',
   ];
-
-  const [tasks, setTasks] = useState(initialTasks);
-  const [tips, setTips] = useState(initialTips);
-  const [allTasksCompleted, setAllTasksCompleted] = useState(false);
-  const [currentDate, setCurrentDate] = useState(new Date());
-
   useEffect(() => {
     checkAllTasksCompleted();
   }, [tasks]);
@@ -87,6 +89,7 @@ const TaskList = () => {
         renderItem={renderTip}
         keyExtractor={(item, index) => index.toString()}
         ListHeaderComponent={<Text style={styles.sectionTitle}>Tips para tener en cuenta...</Text>}
+        showsVerticalScrollIndicator={false} 
       />
 
       <FlatList
@@ -94,6 +97,7 @@ const TaskList = () => {
         renderItem={renderTask}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={<Text style={styles.sectionTitle}>A REALIZAR:</Text>}
+        showsVerticalScrollIndicator={false} 
       />
 
       {allTasksCompleted && (
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
         flex: 1,
       },
       web: {
-        height: height > 1024 ? "55%" : width > 768 ? "60%" : "60%",
+        height: height > 1024 ? "55%" : width > 768 ? "65%" : "60%",
         width: width > 1024 ? "60%" : width > 768 ? "60%" : "70%",
         marginTop: "2%",
         marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
