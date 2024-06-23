@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Dimensions, StyleSheet,Platform } from "react-native";
-import { BarChart } from "react-native-chart-kit";
+import { BarChart,LineChart,ProgressChart } from "react-native-chart-kit";
 import CustomHeader from "./CustomHeader"
 import { AntDesign } from '@expo/vector-icons';
 const { width, height } = Dimensions.get("window");
@@ -13,17 +13,19 @@ const MyProgress = () => {
     datasets: [
       {
         data: [],
+        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+      strokeWidth: 2 // optional
       },
     ],
+    legend: ["Rainy Days"]
   });
 
   const [dataCv, setDataCv] = useState({
     labels: [],
-    datasets: [
-      {
+    
         data: [],
-      },
-    ],
+      
+    
   });
 
 
@@ -57,20 +59,18 @@ const MyProgress = () => {
     const fetchDataCv = async () => {
       // Aquí simulamos una llamada a la API
       const simulatedDataCv = [
-        { formularioCV: "Semana 1", cvEnviados: 20 },
-        { formularioCV: "Semana 2", cvEnviados: 50 },
-        { formularioCV: "Semana 3", cvEnviados: 80 },
-        { formularioCV: "Semana 4", cvEnviados: 100 },
+        { formularioCV: "Semana 1", cvEnviados: 0.80 },
+        { formularioCV: "Semana 2", cvEnviados: 0.95 },
+        { formularioCV: "Semana 3", cvEnviados: 0.100 },
+        { formularioCV: "Semana 4", cvEnviados: 0.300 },
       ];
 
       setTimeout(() => {
         setDataCv({
           labels: simulatedDataCv.map((item) => item.formularioCV),
-          datasets: [
-            {
+          
               data: simulatedDataCv.map((item) => item.cvEnviados),
-            },
-          ],
+            
         });
       }, 1000);
     };
@@ -87,7 +87,7 @@ const MyProgress = () => {
     
       </View>
     
-      <BarChart
+      <LineChart
         data={data}
         width={370}
         height={220}
@@ -114,6 +114,7 @@ const MyProgress = () => {
             stroke: "#ffa726",
           },
         }}
+        bezier
         style={{
           marginVertical:20,
           marginHorizontal:20,
@@ -126,18 +127,21 @@ const MyProgress = () => {
     
       </View>
     
-      <BarChart
+      <ProgressChart
         data={dataCv}
         width={370}
         height={220}
-        
+        strokeWidth={16}
+  radius={32}
+  
+  hideLegend={false}
         chartConfig={{
           backgroundColor: "#f8f8f8",
           backgroundGradientFrom: "#f8f8f8",
           backgroundGradientTo: "#f8f8f8",
           decimalPlaces: 0,
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // Color por defecto
+        labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           style: {
             borderRadius: 16,
           },
@@ -152,6 +156,7 @@ const MyProgress = () => {
             strokeWidth: "2",
             stroke: "#ffa726",
           },
+          
         }}
         style={{
           marginVertical:20,
@@ -191,6 +196,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: "#8c8c8c",
   },
+  
 icon:{
   marginTop:15,
   marginLeft:20

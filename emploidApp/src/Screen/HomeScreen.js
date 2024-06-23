@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         height: height > 1024 ? "190%" : width > 768 ? "95%" : "90%",
         width: width > 1024 ? "60%" : width > 768 ? "80%" : "70%",
         marginTop: "1%",
-        marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
+        marginHorizontal: width >= 1024 ? "20%" : width > 768 ? "35%" : "15%",
        
      
       },
