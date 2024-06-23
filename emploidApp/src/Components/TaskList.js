@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList,Platform,Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList,Platform,Dimensions, ScrollView } from 'react-native';
 import CustomHeader from './CustomHeader';
 import { AntDesign } from '@expo/vector-icons';
 const { width, height } = Dimensions.get("window");
 
 
 const TaskList = () => {
-  
-  const [tasks, setTasks] = useState(initialTasks);
-  const [tips, setTips] = useState(initialTips);
-  const [allTasksCompleted, setAllTasksCompleted] = useState(false);
-  const [currentDate, setCurrentDate] = useState(new Date());
-
   const initialTasks = [
     { id: '1', text: 'Leer sobre buenas prácticas en programación', completed: false },
     { id: '2', text: 'Implementar un patrón de diseño', completed: false },
@@ -24,6 +18,13 @@ const TaskList = () => {
     'Usa nombres significativos para variables y funciones.',
     'Comenta tu código de forma clara y concisa.',
   ];
+  
+  const [tasks, setTasks] = useState(initialTasks);
+  const [tips, setTips] = useState(initialTips);
+  const [allTasksCompleted, setAllTasksCompleted] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+
   useEffect(() => {
     checkAllTasksCompleted();
   }, [tasks]);
@@ -81,7 +82,12 @@ const TaskList = () => {
   return (
     <>
     <CustomHeader/>
+   
     <View style={styles.container}>
+    <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+        >
       <Text style={styles.title}>TAREA DIARIA</Text>
 
       <FlatList
@@ -91,7 +97,7 @@ const TaskList = () => {
         ListHeaderComponent={<Text style={styles.sectionTitle}>Tips para tener en cuenta...</Text>}
         showsVerticalScrollIndicator={false} 
       />
-
+ 
       <FlatList
         data={tasks}
         renderItem={renderTask}
@@ -115,126 +121,137 @@ const TaskList = () => {
           )}
         </View>
       )}
+      </ScrollView>
     </View>
+   
     </>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    ...Platform.select({
-      ios: {
-        flex: 1,
-      },
-      android: {
-        flex: 1,
-      },
-      web: {
-        height: height > 1024 ? "55%" : width > 768 ? "65%" : "60%",
-        width: width > 1024 ? "60%" : width > 768 ? "60%" : "70%",
-        marginTop: "2%",
-        marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
-      },
-    }),
-    justifyContent: 'center',
-    paddingTop: 50,
-    paddingHorizontal: 20,
-    backgroundColor: 'white',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight:'500',
-    marginBottom: 10,
-    textAlign: 'center',
-    textDecorationLine:'underline',
-    color:"#fc8080",
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight:'400',
-    marginBottom: 10,
-    marginTop: 20,
-    textAlign: 'left',
-    textDecorationLine:'underline',
-   
-  },
-  taskItem: {
-    padding: 20,
-    marginVertical: 10,
-    borderRadius: 10,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 5,
-  },
-  taskText: {
-    fontSize: 18,
-    color: '#333',
-    marginBottom: 10,
-  },
-  completed: {
-    textDecorationLine: 'line-through',
-    color: 'gray',
-  },
-  locked: {
-    backgroundColor: '#e0e0e0',
-    borderColor: '#d0d0d0',
-    borderWidth: 1,
-  },
-  hiddenText: {
-    color: 'transparent',
-    textShadowColor: '#ccc',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 1,
-  },
-  completeButton: {
-    backgroundColor: "#fc8080",
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-  },
-  unlockContainer: {
-    marginTop: 20,
-    marginBottom:10,
-   backgroundColor:'#fc8080',
-    alignItems: 'center',
-   borderRadius:5
-  },
-  unlockText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-   
-  },
-  unlockButton: {
-    backgroundColor: '#4CAF50',
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-    alignItems: 'center', 
-  },
-  tipItem: {
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 10,
-    backgroundColor: '#fff4e6',
-  },
-  tipText: {
-    fontSize: 16,
-    color: '#00796b',
-  },
-  tomorrow:{
-    padding: 10,
-    marginVertical: 3,
-    borderRadius: 10,
-    flexDirection: "row",
-    textAlign: 'center', 
-  }
-});
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      paddingTop: 50,
+      paddingHorizontal: 20,
+      backgroundColor: 'white',
+      ...Platform.select({
+        web: {
+          height: height > 1024 ? "80%" : width > 768 ? "30%" : "70%",
+          width: width > 1024 ? "60%" : width > 768 ? "60%" : "70%",
+          marginTop: "2%",
+          marginHorizontal: width > 1024 ? "20%" : width > 768 ? "30%" : "15%",
+       
+        },
+      }),
+    },
+    scrollContainer: {
+      flexGrow: 1,
+      
+    },
+    title: {
+      fontSize: 24,
+      fontWeight: '600',
+      marginBottom: 20,
+      textAlign: 'center',
+      textDecorationLine: 'underline',
+      color: "#fc8080",
+    },
+    sectionTitle: {
+      fontSize: 20,
+      fontWeight: '500',
+      marginBottom: 15,
+      marginTop: 20,
+      textAlign: 'left',
+      textDecorationLine: 'underline',
+      color: '#333',
+    },
+    taskItem: {
+      padding: 20,
+      marginVertical: 10,
+      borderRadius: 10,
+      backgroundColor: '#fff',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 2,
+      elevation: 5,
+    },
+    taskText: {
+      fontSize: 18,
+      color: '#333',
+      marginBottom: 10,
+    },
+    completed: {
+      textDecorationLine: 'line-through',
+      color: 'gray',
+    },
+    locked: {
+      backgroundColor: '#e0e0e0',
+      borderColor: '#d0d0d0',
+      borderWidth: 1,
+    },
+    hiddenText: {
+      color: 'transparent',
+      textShadowColor: '#ccc',
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 1,
+    },
+    completeButton: {
+      backgroundColor: "#fc8080",
+      padding: 10,
+      borderRadius: 5,
+      alignItems: 'center',
+    },
+    buttonText: {
+      color: '#fff',
+      fontSize: 16,
+      fontWeight: '500',
+    },
+    unlockContainer: {
+      marginTop: 20,
+      marginBottom: 10,
+      backgroundColor: '#fc8080',
+      padding: 15,
+      alignItems: 'center',
+      borderRadius: 5,
+    },
+    unlockText: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: '#fff',
+      textAlign: 'center',
+    },
+    unlockButton: {
+      backgroundColor: '#4CAF50',
+      padding: 10,
+      borderRadius: 5,
+      marginTop: 10,
+      alignItems: 'center',
+    },
+    tipItem: {
+      padding: 15,
+      marginVertical: 5,
+      borderRadius: 10,
+      backgroundColor: '#fff4e6',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 1,
+      elevation: 3,
+    },
+    tipText: {
+      fontSize: 16,
+      color: '#00796b',
+    },
+    tomorrow: {
+      padding: 10,
+      marginVertical: 3,
+      borderRadius: 10,
+      flexDirection: "row",
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });
 
 export default TaskList;
