@@ -13,11 +13,9 @@ const MyProgress = () => {
     datasets: [
       {
         data: [],
-        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-      strokeWidth: 2 // optional
       },
     ],
-    legend: ["Rainy Days"]
+    legend: ["Cargando"]
   });
 
   const [dataCv, setDataCv] = useState({
@@ -136,9 +134,9 @@ const MyProgress = () => {
   
   hideLegend={false}
         chartConfig={{
-          backgroundColor: "#f8f8f8",
-          backgroundGradientFrom: "#f8f8f8",
-          backgroundGradientTo: "#f8f8f8",
+          backgroundColor: "#fc8080",
+          backgroundGradientFrom: "#fc8080",
+          backgroundGradientTo: "#fc8080",
           decimalPlaces: 0,
           color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // Color por defecto
         labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
