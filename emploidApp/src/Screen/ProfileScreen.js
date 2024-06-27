@@ -29,30 +29,7 @@ const ProfileScreen = () => {
   });
 
   const handleSave = async () => {
-    // console.log(handleSave)
-    // setIsLoading(true);
-    // try {
-    //   const response = await axios.post(
-    //     "https://your-backend-url.com/api/profile",
-    //     profileData,
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    //   if (response.status !== 200) {
-    //     throw new Error("Error en actualizar la información");
-    //   }
-    //   alert("Cambios guardados con éxito");
-    //   setProfileData(response.data);
-    //   console.log(response.data)
-    // } catch (error) {
-    //   console.error("error de guardado", error);
-    //   alert("Error al actualizar la información");
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    
   };
 
   return (
