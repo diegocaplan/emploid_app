@@ -16,11 +16,12 @@ const FormScreen = () => {
         >
           <View style={styles.card}>
             <Text style={styles.title}>
-              Analicemos tu estado de búsqueda laboral
+            Por favor, completa estas respuestas para poder realizar un seguimiento y acompañamiento más preciso y personalizado.
             </Text>
             <View style={{ marginTop: "5%" }}>
               <Text style={styles.heading}>
-                ¿Por qué completar el formulario?
+              Varias métricas las podrás ver en la sección de "análisis" y "mi red" en LinkedIn.
+              Para los otras métricas, si no conoces un número exacto, escribe un aproximado
               </Text>
               <View style={{ width: "94%" }}>
                 <Text style={styles.normalText}>

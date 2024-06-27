@@ -7,26 +7,71 @@ import {
   FlatList,
   Platform,
   Dimensions,
-  ScrollView,
+  AsyncStorage
 } from "react-native";
 import CustomHeader from "./CustomHeader";
 import { AntDesign } from "@expo/vector-icons";
-import dailyContent from "../../Api/DailyContext.json";
+import dailyContent from '../../Api/DailyContext.json';
+import axios from "axios";
 
 const { width, height } = Dimensions.get("window");
 
 const TaskList = () => {
   const initialTasks = dailyContent.dailyContent.tasks;
   const initialTips = dailyContent.dailyContent.tips;
-
-  const [tasks, setTasks] = useState(initialTasks);
-  const [tips, setTips] = useState(initialTips);
+  const [tasks, setTasks] = useState([]);
+  const [tips, setTips] = useState([]);
   const [allTasksCompleted, setAllTasksCompleted] = useState(false);
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [lastUpdate, setLastUpdate] = useState(new Date(dailyContent.dailyContent.lastUpdate));
+  const [timeLeft, setTimeLeft] = useState(0);
+
+  useEffect(() => {
+    loadContent();
+  }, []);
 
   useEffect(() => {
     checkAllTasksCompleted();
-  }, [tasks]);
+    if (lastUpdate) {
+      startCountdown();
+    }
+  }, [tasks, lastUpdate]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (timeLeft <= 0) {
+        loadContent();
+      } else {
+        setTimeLeft((prev) => prev - 1);
+      }
+    }, 1000); // Actualizar cada segundo
+    return () => clearInterval(intervalId);
+  }, [timeLeft]);
+
+  const loadContent = async () => {
+    try {
+      // const response = await axios.get("http://your-api-endpoint/dailyContent");
+      // const { dailyContent, lastUpdate } = response.data;
+      // setTasks(dailyContent.tasks);
+      // setTips(dailyContent.tips);
+      const { dailyContent, lastUpdate } = require("../../Api/DailyContext.json");
+      setTasks(dailyContent.tasks);
+      setTips(dailyContent.tips);
+      const lastUpdateDate = new Date(lastUpdate);
+      console.log('ACA', lastUpdateDate)
+      setLastUpdate(lastUpdateDate);
+      await AsyncStorage.setItem("lastUpdate", lastUpdateDate.toISOString());
+    } catch (error) {
+      console.log("Error loading daily content:", error);
+    }
+  };
+
+  const startCountdown = () => {
+    const now = new Date();
+    const nextUpdate = new Date(lastUpdate);
+    nextUpdate.setDate(nextUpdate.getDate() + 1); // Próxima actualización en 24 horas
+    const secondsLeft = Math.max((nextUpdate - now) / 1000, 0);
+    setTimeLeft(secondsLeft);
+  };
 
   const handleCompleteTask = (taskId) => {
     setTasks((prevTasks) => {
@@ -72,18 +117,13 @@ const TaskList = () => {
     </View>
   );
 
-  const handleUnlockNext = () => {
-    setCurrentDate(new Date(new Date().setDate(new Date().getDate() + 1)));
-  };
-
-  const isToday = (date) => {
-    const today = new Date();
-    console.log(today);
-    return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
-    );
+  const formatTimeLeft = (seconds) => {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hrs.toString().padStart(2, "0")}:${mins
+      .toString()
+      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   return (
@@ -92,6 +132,10 @@ const TaskList = () => {
 
       <View style={styles.container}>
         <Text style={styles.title}>TAREA DIARIA</Text>
+
+        <Text style={styles.countdownText}>
+          Próximas tareas disponibles en: {formatTimeLeft(timeLeft)}
+        </Text>
 
         <FlatList
           data={tips}
@@ -117,20 +161,21 @@ const TaskList = () => {
 
         {allTasksCompleted && (
           <View style={styles.unlockContainer}>
-            {isToday(currentDate) ? (
-              <View style={styles.tomorrow}>
-                <Text style={styles.unlockText}>
-                  Bien hecho! Mañana se activarán nuevas tareas.
-                </Text>
-                <AntDesign name="checkcircleo" size={24} color="black" />
-              </View>
-            ) : (
+            {timeLeft <= 0 ? (
               <TouchableOpacity
                 style={styles.unlockButton}
-                onPress={handleUnlockNext}
+                onPress={loadContent}
               >
                 <Text style={styles.buttonText}>Desbloquear siguiente</Text>
               </TouchableOpacity>
+            ) : (
+              <View style={styles.tomorrow}>
+                <Text style={styles.unlockText}>
+                  Bien hecho! Nuevas tareas estarán disponibles en{" "}
+                  {formatTimeLeft(timeLeft)}.
+                </Text>
+                <AntDesign name="checkcircleo" size={24} color="black" />
+              </View>
             )}
           </View>
         )}
