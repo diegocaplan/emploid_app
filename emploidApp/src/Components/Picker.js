@@ -16,19 +16,20 @@ const Formulario = () => {
   return (
     <Formik
       initialValues={{
+        option: "",
         curriculumsSent: "",
         linkedInContacts: "",
         linkedInFollowers: "",
         searchAppearances: "",
         profileViews: "",
+        publication: "",
+        publicationDo: "",
         virtualCoffees: "",
         scheduledInterviews: "",
+        interviewProccess: "",
         jobProposals: "",
-        postImpressions: "",
-        postsLastWeek: "",
+        textRecomendation: "",
       }}
-      // initialValues={{ option: "", number: "", text: "" }}
-
       onSubmit={(values, { resetForm }) => {
         const isAnyFieldEmpty = Object.values(values).some(
           (value) => value === ""
@@ -44,7 +45,7 @@ const Formulario = () => {
           alert("Formulario enviado con éxito.");
           // Resetea el formulario
           resetForm();
-          navigation.navigate('MyProgress');
+          navigation.navigate("MyProgress");
         }
       }}
     >
@@ -60,9 +61,33 @@ const Formulario = () => {
         <View>
           <View style={styles.container}>
             <View style={{ marginBottom: 4, marginTop: 5 }}>
+              <View style={{ marginBottom: 4, marginTop: 5 }}>
+                <Text style={styles.title}>
+                  ¿Ya has mejorado tu perfil de LinkedIn y tu CV?
+                </Text>
+                <RadioButton.Group
+                  onValueChange={(value) => setFieldValue("option", value)}
+                  value={values.option}
+                >
+                  <View style={styles.option}>
+                    <Text style={styles.optionLabel}>SI</Text>
+                    <View style={{ marginHorizontal: "20%" }}>
+                      <RadioButton value="si" />
+                    </View>
+                  </View>
+                  <View style={styles.option}>
+                    <Text style={styles.optionLabel}>NO</Text>
+                    <View style={{ marginHorizontal: "19%" }}>
+                      <RadioButton value="no" />
+                    </View>
+                  </View>
+                </RadioButton.Group>
+                {errors.curriculumsSent && touched.curriculumsSent ? (
+                  <Text style={styles.errorText}>{errors.curriculumsSent}</Text>
+                ) : null}
+              </View>
               <Text style={styles.title}>
-                ¿Cuántos currículum has enviado la última semana
-                aproximadamente?
+                ¿Cuántos CV enviaste esta última semana?
               </Text>
               <TextInput
                 style={styles.input}
@@ -77,7 +102,7 @@ const Formulario = () => {
             </View>
             <View style={{ marginBottom: 4, marginTop: 5 }}>
               <Text style={styles.title}>
-                Escribe cuántos contactos tienes en LinkedIn
+                ¿Cuántos contactos tienes en LinkedIn?
               </Text>
               <TextInput
                 style={styles.input}
@@ -92,7 +117,7 @@ const Formulario = () => {
             </View>
             <View style={{ marginBottom: 4, marginTop: 5 }}>
               <Text style={styles.title}>
-                Escribe cuántos seguidores tienes en LinkedIn
+                ¿Cuántos seguidores tienes en LinkedIn?
               </Text>
               <TextInput
                 style={styles.input}
@@ -107,7 +132,7 @@ const Formulario = () => {
             </View>
             <View style={{ marginBottom: 4, marginTop: 5 }}>
               <Text style={styles.title}>
-                Escribe cuántas apariciones en búsquedas tienes en LinkedIn
+                ¿Cuántas de apariciones en búsquedas de LinkedIn figuran?
               </Text>
               <TextInput
                 style={styles.input}
@@ -122,7 +147,7 @@ const Formulario = () => {
             </View>
             <View style={{ marginBottom: 4, marginTop: 5 }}>
               <Text style={styles.title}>
-                Escribe cuántas visualizaciones de tu perfil tienes en LinkedIn
+                ¿Cuántas visualizaciones del perfil de LinkedIn figuran?
               </Text>
               <TextInput
                 style={styles.input}
@@ -135,9 +160,44 @@ const Formulario = () => {
                 <Text style={styles.errorText}>{errors.profileViews}</Text>
               ) : null}
             </View>
+
             <View style={{ marginBottom: 4, marginTop: 5 }}>
               <Text style={styles.title}>
-                ¿Cuántos café virtuales has tomado esta última semana?
+                ¿Cuántas impresiones de publicaciones en LinkedIn figuran?
+              </Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={handleChange("publication")}
+                onBlur={handleBlur("publication")}
+                value={values.publication}
+                keyboardType="numeric"
+              />
+              {errors.publication && touched.publication ? (
+                <Text style={styles.errorText}>{errors.publication}</Text>
+              ) : null}
+            </View>
+
+            <View style={{ marginBottom: 4, marginTop: 5 }}>
+              <Text style={styles.title}>
+                ¿Cuántas publicaciones propias has realizado en la última
+                semana?
+              </Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={handleChange("publicationDo")}
+                onBlur={handleBlur("publicationDo")}
+                value={values.publicationDo}
+                keyboardType="numeric"
+              />
+              {errors.publicationDo && touched.publicationDo ? (
+                <Text style={styles.errorText}>{errors.publicationDo}</Text>
+              ) : null}
+            </View>
+
+            <View style={{ marginBottom: 4, marginTop: 5 }}>
+              <Text style={styles.title}>
+                ¿Cuántos cafés virtuales has tomado en la última semana?
+                (Charlas en vivo con nuevos contactos)
               </Text>
               <TextInput
                 style={[{ height: 50 }, styles.input]}
@@ -150,9 +210,10 @@ const Formulario = () => {
                 <Text style={styles.errorText}>{errors.virtualCoffees}</Text>
               ) : null}
             </View>
+
             <View style={{ marginBottom: 4, marginTop: 5 }}>
               <Text style={styles.title}>
-                ¿Cuántas entrevistas agendaste esta semana?
+                ¿En cuántas entrevistas participaste en esta última semana?
               </Text>
               <TextInput
                 style={styles.input}
@@ -167,9 +228,41 @@ const Formulario = () => {
                 </Text>
               ) : null}
             </View>
+
             <View style={{ marginBottom: 4, marginTop: 5 }}>
               <Text style={styles.title}>
-                ¿Cuántas propuestas laborales recibiste?
+                ¿Has avanzado en algún proceso de selección en esta última
+                semana?
+              </Text>
+
+
+
+              <RadioButton.Group
+                  onValueChange={(value) => setFieldValue("interviewProccess", value)}
+                  value={values.interviewProccess}
+                >
+                  <View style={styles.option}>
+                    <Text style={styles.optionLabel}>SI</Text>
+                    <View style={{ marginHorizontal: "20%" }}>
+                      <RadioButton value="si" />
+                    </View>
+                  </View>
+                  <View style={styles.option}>
+                    <Text style={styles.optionLabel}>NO</Text>
+                    <View style={{ marginHorizontal: "19%" }}>
+                      <RadioButton value="no" />
+                    </View>
+                  </View>
+                </RadioButton.Group>
+            
+              {errors.interviewProccess && touched.interviewProccess ? (
+                <Text style={styles.errorText}>{errors.interviewProccess}</Text>
+              ) : null}
+            </View>
+
+            <View style={{ marginBottom: 4, marginTop: 5 }}>
+              <Text style={styles.title}>
+                ¿Cuántas propuestas laborales has recibido esta última semana?
               </Text>
               <TextInput
                 style={styles.input}
@@ -182,7 +275,20 @@ const Formulario = () => {
                 <Text style={styles.errorText}>{errors.jobProposals}</Text>
               ) : null}
             </View>
-            <View style={{ marginBottom: 4, marginTop: 5 }}>
+
+            <Text style={styles.title}>
+              Comentarios y consultas para mentores
+            </Text>
+            <TextInput
+              style={[{ height: 90 }, styles.input]}
+              onChangeText={handleChange("textRecomendation")}
+              onBlur={handleBlur("textRecomendation")}
+              value={values.textRecomendation}
+            />
+            {errors.textRecomendation && touched.textRecomendation? (
+              <Text style={styles.errorText}>{errors.textRecomendation}</Text>
+            ) : null}
+            {/* <View style={{ marginBottom: 4, marginTop: 5 }}>
               <Text style={styles.title}>
                 Escribe cuántas impresiones de publicaciones tienes en LinkedIn
               </Text>
@@ -211,69 +317,13 @@ const Formulario = () => {
               {errors.postsLastWeek && touched.postsLastWeek ? (
                 <Text style={styles.errorText}>{errors.postsLastWeek}</Text>
               ) : null}
-            </View>
+            </View> */}
           </View>
           <TouchableOpacity onPress={handleSubmit} style={styles.button}>
             <Text style={styles.buttonText}>Guardar respuestas</Text>
           </TouchableOpacity>
         </View>
       )}
-      {/* <Text style={styles.title}>¿Qué objetivo tienes?</Text>
-            <RadioButton.Group
-              onValueChange={(value) => setFieldValue("option", value)}
-              value={values.option}
-            >
-              <View style={styles.option}>
-                <Text style={styles.optionLabel}>
-                  Busco mi primer empleo {"\n"} en IT
-                </Text>
-                <View style={{ marginHorizontal: "20%" }}>
-                  <RadioButton value="primera" />
-                </View>
-              </View>
-              <View style={styles.option}>
-                <Text style={styles.optionLabel}>
-                  Busco un cambio laboral {"\n"}dentro de IT
-                </Text>
-                <View style={{ marginHorizontal: "19%" }}>
-                  <RadioButton value="segunda" />
-                </View>
-              </View>
-              <View style={styles.option}>
-                <Text style={styles.optionLabel}>
-                  Quiero trabajar por cuenta propia
-                </Text>
-                <View style={{ marginHorizontal: "15%" }}>
-                  <RadioButton value="tercera" />
-                </View>
-              </View>
-            </RadioButton.Group>
-            <View style={{ marginBottom: 4, marginTop: 5 }}>
-              <Text style={styles.title}>
-                ¿Cuántos CVs enviaste en la última semana?
-              </Text>
-              <TextInput
-                style={[{ height: 50 }, styles.input]}
-                onChangeText={handleChange("number")}
-                onBlur={handleBlur("number")}
-                value={values.number}
-                keyboardType="numeric"
-              />
-
-              {errors.number && touched.number ? (
-                <Text style={styles.errorText}>{errors.number}</Text>
-              ) : null}
-            </View>
-            <Text style={styles.title}>Déjanos feedback:</Text>
-            <TextInput
-              style={[{ height: 90 }, styles.input]}
-              onChangeText={handleChange("text")}
-              onBlur={handleBlur("text")}
-              value={values.text}
-            />
-            {errors.text && touched.text ? (
-              <Text style={styles.errorText}>{errors.text}</Text>
-            ) : null} */}
     </Formik>
   );
 };
