@@ -5,13 +5,14 @@
       { "id": "2", "text": "Implementar un patrón de diseño", "completed": false },
       { "id": "3", "text": "Refactorizar un proyecto viejo", "completed": false },
       { "id": "4", "text": "Escribir pruebas unitarias", "completed": false }
-    ],
+    ], 
+   
     "tips": [
       "Organiza tu código en módulos.",
       "Usa nombres significativos para variables y funciones.",
       "Comenta tu código de forma clara y concisa."
-    ],
-    "lastUpdate": "2024-07-25T12:00:00Z"
+    ]
+    
 
   }
   
