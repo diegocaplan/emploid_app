@@ -23,14 +23,14 @@ const FormScreen = () => {
               Varias métricas las podrás ver en la sección de "análisis" y "mi red" en LinkedIn.
               Para los otras métricas, si no conoces un número exacto, escribe un aproximado
               </Text>
-              <View style={{ width: "94%" }}>
+              {/* <View style={{ width: "94%" }}>
                 <Text style={styles.normalText}>
                   {" "}
                   Esta información nos ayuda entender tus objetivos y tu
                   progreso en la búsqueda de nuevas oportunidades. Son métricas
                   para analizar tus avances y poder realizar un seguimiento.
                 </Text>
-              </View>
+              </View> */}
 
               <Formulario />
             </View>

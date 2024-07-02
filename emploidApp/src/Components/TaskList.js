@@ -1,89 +1,90 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  StyleSheet,
-  Text,
   View,
+  Text,
   TouchableOpacity,
   FlatList,
-  Platform,
+  StyleSheet,
   Dimensions,
-  AsyncStorage
+  Platform,
 } from "react-native";
-import CustomHeader from "./CustomHeader";
-import { AntDesign } from "@expo/vector-icons";
-import dailyContent from '../../Api/DailyContext.json';
 import axios from "axios";
-
+import { AntDesign } from "@expo/vector-icons";
+import dailyContent from "../../Api/DailyContext.json";
 const { width, height } = Dimensions.get("window");
 
 const TaskList = () => {
   const initialTasks = dailyContent.dailyContent.tasks;
   const initialTips = dailyContent.dailyContent.tips;
-  const [tasks, setTasks] = useState([]);
-  const [tips, setTips] = useState([]);
+
+  const [tasks, setTasks] = useState(initialTasks);
+  const [tips, setTips] = useState(initialTips);
+  // const [tasks, setTasks] = useState([]);
+  // const [tips, setTips] = useState([]);
+
   const [allTasksCompleted, setAllTasksCompleted] = useState(false);
-  const [lastUpdate, setLastUpdate] = useState(new Date(dailyContent.dailyContent.lastUpdate));
-  const [timeLeft, setTimeLeft] = useState(0);
+  const [timer, setTimer] = useState(24 * 60 * 60);
 
   useEffect(() => {
     loadContent();
-  }, []);
-
-  useEffect(() => {
-    checkAllTasksCompleted();
-    if (lastUpdate) {
-      startCountdown();
-    }
-  }, [tasks, lastUpdate]);
-
-  useEffect(() => {
     const intervalId = setInterval(() => {
-      if (timeLeft <= 0) {
-        loadContent();
-      } else {
-        setTimeLeft((prev) => prev - 1);
-      }
-    }, 1000); // Actualizar cada segundo
+      setTimer((prevTimer) => {
+        if (prevTimer === 0) {
+          fetchTasks();
+          return 24 * 60 * 60;
+        }
+        return prevTimer - 1;
+      });
+    }, 1000);
+
     return () => clearInterval(intervalId);
-  }, [timeLeft]);
+  }, []);
 
   const loadContent = async () => {
     try {
-      // const response = await axios.get("http://your-api-endpoint/dailyContent");
-      // const { dailyContent, lastUpdate } = response.data;
-      // setTasks(dailyContent.tasks);
-      // setTips(dailyContent.tips);
-      const { dailyContent, lastUpdate } = require("../../Api/DailyContext.json");
+      const { dailyContent } = require("../../Api/DailyContext.json");
       setTasks(dailyContent.tasks);
       setTips(dailyContent.tips);
-      const lastUpdateDate = new Date(lastUpdate);
-      console.log('ACA', lastUpdateDate)
-      setLastUpdate(lastUpdateDate);
-      await AsyncStorage.setItem("lastUpdate", lastUpdateDate.toISOString());
+      setTasks(tasks);
+      setTips(tips);
+      checkAllTasksCompleted(tasks);
     } catch (error) {
       console.log("Error loading daily content:", error);
     }
   };
 
-  const startCountdown = () => {
-    const now = new Date();
-    const nextUpdate = new Date(lastUpdate);
-    nextUpdate.setDate(nextUpdate.getDate() + 1); // Próxima actualización en 24 horas
-    const secondsLeft = Math.max((nextUpdate - now) / 1000, 0);
-    setTimeLeft(secondsLeft);
+  const fetchTasks = async () => {
+    try {
+      // const response = await axios.get("http://localhost:3000/tasks");
+      // const { tasks } = response.data;
+      setTasks(tasks);
+      checkAllTasksCompleted(tasks);
+    } catch (error) {
+      console.log("Error fetching tasks:", error);
+    }
   };
 
-  const handleCompleteTask = (taskId) => {
-    setTasks((prevTasks) => {
-      return prevTasks.map((task) =>
-        task.id === taskId ? { ...task, completed: true } : task
-      );
-    });
+  const handleCompleteTask = async (taskId) => {
+    try {
+      // await axios.post(`http://localhost:3000/tasks/${taskId}/complete`);
+      fetchTasks();
+    } catch (error) {
+      console.error("Error completing task:", error);
+    }
   };
 
-  const checkAllTasksCompleted = () => {
+  const checkAllTasksCompleted = (tasks) => {
     const incompleteTask = tasks.find((task) => !task.completed);
     setAllTasksCompleted(!incompleteTask);
+  };
+
+  const formatTime = (seconds) => {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hrs.toString().padStart(2, "0")}:${mins
+      .toString()
+      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   const renderTask = ({ item, index }) => {
@@ -117,70 +118,52 @@ const TaskList = () => {
     </View>
   );
 
-  const formatTimeLeft = (seconds) => {
-    const hrs = Math.floor(seconds / 3600);
-    const mins = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${hrs.toString().padStart(2, "0")}:${mins
-      .toString()
-      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
-  };
-
   return (
-    <>
-      <CustomHeader />
+    <View style={styles.container}>
+      <Text style={styles.title}>TAREA DIARIA</Text>
 
-      <View style={styles.container}>
-        <Text style={styles.title}>TAREA DIARIA</Text>
+      <Text style={styles.countdownText}>
+        Próximas tareas disponibles en: {formatTime(timer)}
+      </Text>
 
-        <Text style={styles.countdownText}>
-          Próximas tareas disponibles en: {formatTimeLeft(timeLeft)}
-        </Text>
+      <FlatList
+        data={tips}
+        renderItem={renderTip}
+        keyExtractor={(item, index) => index.toString()}
+        ListHeaderComponent={
+          <Text style={styles.sectionTitle}>Tips para tener en cuenta...</Text>
+        }
+        showsVerticalScrollIndicator={false}
+      />
 
-        <FlatList
-          data={tips}
-          renderItem={renderTip}
-          keyExtractor={(item, index) => index.toString()}
-          ListHeaderComponent={
-            <Text style={styles.sectionTitle}>
-              Tips para tener en cuenta...
-            </Text>
-          }
-          showsVerticalScrollIndicator={false}
-        />
+      <FlatList
+        data={tasks}
+        renderItem={renderTask}
+        keyExtractor={(item) => item.id.toString()}
+        ListHeaderComponent={
+          <Text style={styles.sectionTitle}>A REALIZAR:</Text>
+        }
+        showsVerticalScrollIndicator={false}
+      />
 
-        <FlatList
-          data={tasks}
-          renderItem={renderTask}
-          keyExtractor={(item) => item.id}
-          ListHeaderComponent={
-            <Text style={styles.sectionTitle}>A REALIZAR:</Text>
-          }
-          showsVerticalScrollIndicator={false}
-        />
-
-        {allTasksCompleted && (
-          <View style={styles.unlockContainer}>
-            {timeLeft <= 0 ? (
-              <TouchableOpacity
-                style={styles.unlockButton}
-                onPress={loadContent}
-              >
-                <Text style={styles.buttonText}>Desbloquear siguiente</Text>
-              </TouchableOpacity>
-            ) : (
-              <View style={styles.tomorrow}>
-                <Text style={styles.unlockText}>
-                  Bien hecho! Nuevas tareas estarán disponibles en{" "}
-                  {formatTimeLeft(timeLeft)}.
-                </Text>
-                <AntDesign name="checkcircleo" size={24} color="black" />
-              </View>
-            )}
-          </View>
-        )}
-      </View>
-    </>
+      {allTasksCompleted && (
+        <View style={styles.unlockContainer}>
+          {timer <= 0 ? (
+            <TouchableOpacity style={styles.unlockButton} onPress={fetchTasks}>
+              <Text style={styles.buttonText}>Desbloquear siguiente</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.tomorrow}>
+              <Text style={styles.unlockText}>
+                ¡Bien hecho! Nuevas tareas estarán disponibles en{" "}
+                {formatTime(timer)}
+              </Text>
+              <AntDesign name="checkcircleo" size={24} color="black" />
+            </View>
+          )}
+        </View>
+      )}
+    </View>
   );
 };
 
