@@ -6,12 +6,17 @@ import {
   Image,
   Platform,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 const { width, height } = Dimensions.get("window");
 import Swiper from "react-native-swiper";
 import imageJob from "../../assets/job.jpg";
 import imageApp from "../../assets/Apps.jpg";
+
 const Carousel = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.view}>
       <Swiper
@@ -22,24 +27,28 @@ const Carousel = () => {
         autoplayTimeout={6}
       >
         <View style={styles.slide1}>
+          <Image source={imageJob} style={styles.image} />
           <Text style={styles.text}>
             ¿Te imaginas recibiendo ofertas de empleo y teniendo entrevistas en
             esos roles que tanto te interesan?
           </Text>
         </View>
         <View style={styles.slide}>
-          <Image source={imageApp} style={styles.imageApp} />
-          <Text style={styles.text}>
+          <Text style={styles.smallText}>
             Somos el primer mentor virtual que te brinda las herramientas
             necesarias para que consigas empleo IT.{" "}
           </Text>
         </View>
 
         <View style={styles.slide}>
-          <Text style={styles.text}>
-            +800 TALENTOS INSERTADOS EN EL MUNDO IT.{" "}
-          </Text>
-          <Image source={imageJob} style={styles.image} />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("SubscriptionPlans")}
+          >
+            <Text style={[styles.smallText, { color: "#f35999" }]}>
+              "¿Querés lograr tus objetivos profesionales? Conoce nuestros
+              planes aquí".
+            </Text>
+          </TouchableOpacity>
         </View>
       </Swiper>
     </View>
@@ -49,16 +58,17 @@ const Carousel = () => {
 const styles = StyleSheet.create({
   view: {
     flex: 1,
-    marginHorizontal: "18%",
-    marginTop: "10%",
+    marginHorizontal: "8%",
+    marginTop: width * 0.1,
   },
   wrapper: {},
   slide: {
     flex: 1,
     marginTop: 5,
+    marginLeft: 20,
     alignItems: "center",
     backgroundColor: "white",
-    width: "70%",
+    width: "100%",
     flexDirection: "row",
     padding: 8,
     marginBottom: "15%",
@@ -75,22 +85,30 @@ const styles = StyleSheet.create({
     marginBottom: "15%",
   },
   image: {
-    width: "80%",
-    height: 90,
-    marginBottom: "15%",
+    width: 190,
+    height: 190,
+    marginBottom: "5%",
     marginTop: "5%",
   },
   imageApp: {
-    width: "70%",
-    height: 90,
-    marginBottom: "15%",
+    width: 150,
+    height: 150,
+    marginBottom: "5%",
     marginTop: "5%",
   },
   text: {
     color: "black",
     fontSize: 15,
     fontStyle: "italic",
-    fontWeight: "600",
+    fontWeight: "400",
+    width: "50%",
+  },
+  smallText: {
+    color: "black",
+    fontSize: 18, // Ajusta el tamaño del texto
+    fontStyle: "italic",
+    fontWeight: "400",
+    marginLeft: 20, // Añade un margen para separar el texto de la imagen
   },
 });
 

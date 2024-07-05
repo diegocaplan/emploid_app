@@ -14,11 +14,12 @@ import {
 import { AuthContext } from "../Context/AuthContext";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import CustomHeader from "../Components/CustomHeader";
+import Header from "../Components/Header";
 
 const { width, height } = Dimensions.get("window");
 
 const ProfileScreen = () => {
-  const {logout}= useContext(AuthContext)
+  const { logout } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
   const [profileData, setProfileData] = useState({
     name: "",
@@ -28,13 +29,11 @@ const ProfileScreen = () => {
     plan: "Plan Free",
   });
 
-  const handleSave = async () => {
-    
-  };
+  const handleSave = async () => {};
 
   return (
     <>
-      <CustomHeader />
+      <Header />
       <View style={styles.container}>
         <View style={styles.avatarContainer}>
           <Image
@@ -122,7 +121,7 @@ const ProfileScreen = () => {
                 <Icon name="edit" size={20} color="#333" style={styles.icon} />
               </View>
             </View>
-            <TouchableOpacity style={styles.buttonOut}  onPress={logout}>
+            <TouchableOpacity style={styles.buttonOut} onPress={logout}>
               <Text style={styles.textOut}>Cerrar sesión</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleSave}>

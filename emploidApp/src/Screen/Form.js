@@ -3,12 +3,13 @@ import { View, Text, StyleSheet, Dimensions, Platform } from "react-native";
 import Formulario from "../Components/Picker";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomHeader from "../Components/CustomHeader";
+import Header from "../Components/Header";
 
 const { width, height } = Dimensions.get("window");
 const FormScreen = () => {
   return (
     <>
-      <CustomHeader />
+     <Header/>
       <View style={styles.container}>
         <ScrollView
           contentContainerStyle={styles.scrollContainer}

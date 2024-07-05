@@ -26,25 +26,27 @@ const HomeScreen = () => {
           text="En las próximas 48 hs deberás completar un nuevo Formulario"
           
         />
+       
+         
       </View>
 
-      {/* {Platform.OS === "web" && <CardHome/>} */}
+      {Platform.OS === "web" && <CardHome/>} 
 
-      <View style={{flex:1}}>
-      {Platform.OS !== "web" && <Carousel />}
-      </View>
-      {Platform.OS === 'web' ? (
-        <ScrollView showsVerticalScrollIndicator={false}>
+      
+       {Platform.OS === 'web' ? (
+        
           <View style={styles.viewHome}>
             <HomeCard />
           </View>
-        </ScrollView>
+       
       ) : (
         <View style={styles.viewHome}>
           <HomeCard />
         </View>
       )}
-  
+ 
+      {Platform.OS !== "web" && <Carousel />}
+      
     </View>
   );
 };
@@ -52,12 +54,15 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
 
   viewHome: {
+    
     ...Platform.select({
       ios: {
         flex: 1,
+        marginTop:'28%'
       },
       android: {
         flex: 1,
+         marginTop:'28%'
       },
       web: {
         height: height > 1024 ? "190%" : width > 768 ? "95%" : "90%",
@@ -70,7 +75,12 @@ const styles = StyleSheet.create({
     }),
   },
   web: {
-   
+    position: "absolute",
+    zIndex: 1,
+    top: 100, 
+    width: "100%",
+    marginBottom:30,
+    paddingHorizontal: 20,
     ...Platform.select({
       web: {
         marginTop: "-6%",
@@ -79,6 +89,7 @@ const styles = StyleSheet.create({
     }),
   },
   container: {
+    
     ...Platform.select({
       ios: {
         flex: 1,

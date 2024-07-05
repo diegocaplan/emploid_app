@@ -33,7 +33,7 @@ const MyStack = () => {
      
       <Stack.Screen
         name="Root"
-        component={HomeScreen}
+        component={MyTabs}
         screenOptions={{ headerShown: false }}
       />
       <Stack.Screen

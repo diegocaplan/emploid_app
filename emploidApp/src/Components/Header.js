@@ -5,7 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import logo from "../../assets/logoId.png";
 
-const CustomHeader = () => {
+const Header = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -48,7 +48,7 @@ const CustomHeader = () => {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: "#ff7c4d",
-    height: 200,
+    height: 100,
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
@@ -58,8 +58,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    borderBottomLeftRadius:65,
-    borderBottomRightRadius:65
+   
   },
   iconContainer: {
     position: 'fixed',
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
     width: 85,
     height: 85,
     resizeMode: "contain",
-    marginTop: '-10%',
+    marginTop: '5%',
   },
 });
-export default CustomHeader;
+export default Header;

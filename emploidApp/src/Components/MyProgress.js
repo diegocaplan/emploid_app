@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Dimensions, StyleSheet,Platform } from "react-native";
 import { BarChart,LineChart,ProgressChart } from "react-native-chart-kit";
+import Collapsible from "./Collapsible";
 import CustomHeader from "./CustomHeader"
 import { AntDesign } from '@expo/vector-icons';
+import CollapsibleText from "./Collapsible";
 const { width, height } = Dimensions.get("window");
 
 
 
 const MyProgress = () => {
+  
   const [data, setData] = useState({
     labels: [],
     datasets: [
@@ -77,8 +80,9 @@ const MyProgress = () => {
   }, []);
   return (
     <>
-     <CustomHeader />
+     <CustomHeader/>
     <View style={styles.container}>
+      <CollapsibleText/>
       <View style={{flexDirection:'row'}}>
       <AntDesign name="areachart" size={24} color="black" style={styles.icon} />
       <Text style={styles.title}> Cantidad de contactos en LinkedIn:</Text>

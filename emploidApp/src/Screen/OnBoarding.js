@@ -59,7 +59,7 @@ const OnBoarding = () => {
     navigation.navigate("Login");
   };
   return (
-    <LinearGradient colors={["#f35999", "#c30752"]} style={styles.gradient}>
+    <LinearGradient colors={["#ff0000", "#ff6666"]} style={styles.gradient}>
       <View style={styles.container}>
         <FlatList
           data={carouselItems}
