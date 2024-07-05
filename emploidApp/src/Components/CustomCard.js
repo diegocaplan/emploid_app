@@ -37,9 +37,11 @@ const CustomCard = ({ title, text }) => {
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 8,
-    borderColor: "#f35999",
-    borderWidth: 1,
+    width:'100%',
+    height:150,
+    borderRadius: 15,
+    borderColor: "black",
+    borderWidth: 0.5,
     overflow: "hidden",
     margin: 8,
     backgroundColor: "#fff",
@@ -48,8 +50,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     flexDirection: "row",
-    elevation: 3,
-    marginTop: "8%",
+    elevation: 4,
+    marginTop: "7%",
+    marginHorizontal: "auto",
     ...Platform.select({
       web: {
         height: height > 1024 ? "100%" : width > 768 ? "50%" : "70%",
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
 
     height: "100%",
     marginBottom: "5%",
-    marginTop: "5%",
+    marginTop: "3%",
     resizeMode: "cover",
   },
   content: {

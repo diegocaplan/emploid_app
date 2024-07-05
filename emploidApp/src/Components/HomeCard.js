@@ -35,7 +35,7 @@ const HomeCard = () => {
   const navigation = useNavigation();
 
   return (
-  <ScrollView showsVerticalScrollIndicator={false}>
+  <>
       <View style={styles.row}>
         <CustomCard
           title="DESAFÍO DIARIO"
@@ -50,28 +50,22 @@ const HomeCard = () => {
           onPress={() => navigation.navigate("MyProgress")}
         />
       </View>
-      <View style={styles.row}>
-        <CustomCard
-          title="VER PLANES"
-          iconName="shoppingcart"
-          onPress={() => navigation.navigate("SubscriptionPlans")}
-        />
-      </View>
-      </ScrollView>
+    
+      </>
   );
 };
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-
+marginTop:'1.5%',
     borderRadius: 8,
 
-    borderColor: "black",
-    borderWidth: 0.5,
+    borderColor: "#ff4500",
+    borderWidth: 1,
     overflow: "hidden",
     margin: 10,
 
-    backgroundColor: "#F8F9F9",
+    backgroundColor: "white",
     ...Platform.select({
       web: {
         backgroundColor: "#e6e6e6",
@@ -94,7 +88,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: "auto",
-    color: "#1a1a1a",
+    color: "#ff4500",
+    width:45
   },
   image: {
     width: "100%",
@@ -107,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     marginLeft: 10,
-    color: "#8c8c8c",
+    color: "black",
   },
   container: {
     flexGrow: 1,

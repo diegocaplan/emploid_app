@@ -13,7 +13,7 @@ import logo from "../../assets/logoId.png";
 const { width, height } = Dimensions.get("window");
 const LoginScreen = () => {
   return (
-    <LinearGradient colors={["#f35999", "#c30752"]} style={styles.gradient}>
+    <LinearGradient colors={["#ff0000", "#ff6666"]} style={styles.gradient}>
       <Image source={logo} style={styles.image} />
       <View style={styles.container}>
         <Text style={styles.text} numberOfLines={2}>
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: 65,
-    height: 65,
+    width: 85,
+    height: 85,
     resizeMode: "contain",
     marginTop: "-30%",
     ...Platform.select({
