@@ -1,19 +1,111 @@
 import React from "react";
-import { View, Text,StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  Dimensions,
+  ScrollView,
+ 
+} from "react-native";
+import CustomHeader from "../Components/CustomHeader";
+import SubscriptionPlans from "../Components/PlanCard";
+import CustomCard from "../Components/CustomCard";
+import HomeCard from "../Components/HomeCard";
+import Carousel from "../Components/Carousel";
+import CardHome from "../Components/CardHome";
+const { width, height } = Dimensions.get("window");
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Text> home</Text>
+      <CustomHeader />
+      <View style={styles.web}>
+        <CustomCard
+          title="Bienvenido!"
+          text="En las próximas 48 hs deberás completar un nuevo Formulario"
+          
+        />
+       
+         
+      </View>
+
+      {Platform.OS === "web" && <CardHome/>} 
+
+      
+       {Platform.OS === 'web' ? (
+        
+          <View style={styles.viewHome}>
+            <HomeCard />
+          </View>
+       
+      ) : (
+        <View style={styles.viewHome}>
+          <HomeCard />
+        </View>
+      )}
+ 
+      {Platform.OS !== "web" && <Carousel />}
+      
     </View>
   );
 };
 
-
 const styles = StyleSheet.create({
-container:{
-    flex:1,
-      backgroundColor: '#fae3ea',
-}
-})
+
+  viewHome: {
+    
+    ...Platform.select({
+      ios: {
+        flex: 1,
+        marginTop:'28%'
+      },
+      android: {
+        flex: 1,
+         marginTop:'28%'
+      },
+      web: {
+        height: height > 1024 ? "190%" : width > 768 ? "95%" : "90%",
+        width: width > 1024 ? "60%" : width > 768 ? "80%" : "70%",
+        marginTop: "1%",
+        marginHorizontal: width >= 1024 ? "20%" : width > 768 ? "35%" : "15%",
+       
+     
+      },
+    }),
+  },
+  web: {
+    position: "absolute",
+    zIndex: 1,
+    top: 100, 
+    width: "100%",
+    marginBottom:30,
+    paddingHorizontal: 20,
+    ...Platform.select({
+      web: {
+        marginTop: "-6%",
+       
+      },
+    }),
+  },
+  container: {
+    
+    ...Platform.select({
+      ios: {
+        flex: 1,
+      },
+      android: {
+        flex: 1,
+      },
+      web: {
+        flex: 1,
+        marginBottom:'50%'
+       
+      },
+    }),
+
+    backgroundColor: "#ffffff",
+   
+  },
+});
 export default HomeScreen;

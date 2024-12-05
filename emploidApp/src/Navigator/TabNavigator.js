@@ -20,15 +20,20 @@ export default function MyTabs({ focused }) {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-          height: 65,
+          height: 75,
           left: 0,
           right: 0,
-          backgroundColor: "#f35999",
-
-          borderTopWidth: 2,
+          backgroundColor: "#f2f2f2",
+          ...Platform.select({
+            web: {
+             backgroundColor:'#bfbfbf' 
+            }
+          }),
+          borderTopWidth: 0.5,
+          borderColor:'#ff4500',
           paddingTop: 8,
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
+          borderTopLeftRadius: 19,
+          borderTopRightRadius: 19,
         },
         tabBarInactiveTintColor: "#FFFFFF",
         tabBarActiveTintColor: "white",
@@ -38,14 +43,14 @@ export default function MyTabs({ focused }) {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Root"
         component={HomeScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <MaterialIcons
               name="home"
-              color={focused ? "white" : "#c30752"}
+              color={focused ? "#ff4500" : "#707B7C"}
               size={35}
             />
           ),
@@ -61,7 +66,7 @@ export default function MyTabs({ focused }) {
             <Entypo
               name="new-message"
               size={24}
-              color={focused ? "white" : "#c30752"}
+              color={focused ? "#ff4500" : "#707B7C"}
             />
           ),
         }}
@@ -74,7 +79,7 @@ export default function MyTabs({ focused }) {
           tabBarIcon: ({ color, focused }) => (
             <MaterialIcons
               name="person"
-              color={focused ? "white" : "#c30752"}
+              color={focused ? "#ff4500" : "#707B7C"}
               size={35}
             />
           ),
@@ -90,6 +95,11 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     backgroundColor: "#FCC5D2",
+    ...Platform.select({
+      web: {
+       backgroundColor:'#d6d6c2' 
+      }
+    }),
     borderTopColor: "red",
     borderTopWidth: 2,
     paddingTop: 8,

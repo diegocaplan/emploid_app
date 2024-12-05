@@ -1,61 +1,98 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 import {
   Text,
   View,
   StyleSheet,
   Platform,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Linking,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { handleLogin } from "../Storage/Storage";
-// import { Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import Input from "./Input";
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
+
 const SignIn = () => {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    login,
+    isLoading,
+    authState,
+  } = useContext(AuthContext);
   const navigation = useNavigation();
-  //cambiar cuando tenga mi estado global
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLoginPress = () => {
-    handleLogin({ user, password, navigation });
-  };
   return (
     <React.Fragment>
       <View style={styles.cont}>
         <Input
-          label={"Usuario"}
-          value={user}
+          label={"Email"}
+          value={email}
           onChangeText={(text) => {
-            setUser(text.trim());
+            setEmail(text.trim());
           }}
         />
+
+        {/* <View style={styles.viewPassword}>
+        //CONTRASEÑA
         <Input
           label={"Contraseña"}
           value={password}
           onChangeText={setPassword}
           secureTextEntry={!showPassword}
+        
         />
-
-        <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
-          <Text style={styles.buttonText}>INGRESAR</Text>
+          <TouchableOpacity onPress={toggleShowPassword} activeOpacity={0.8} style={styles.show}>
+          <Feather
+            name={showPassword ? "eye" : "eye-off"}
+            size={20}
+            color="#b3b3b3"
+          />
         </TouchableOpacity>
+        </View> */}
+
+        <TouchableOpacity
+          style={styles.button}
+          // onPress={login}
+          onPress={() => navigation.navigate("Root")}
+          disabled={isLoading}
+        >
+          <Text style={styles.buttonText}>INGRESAR</Text>
+          {/* <Text style={styles.buttonText}>{isLoading ? 'Logging in...' : 'Login'}</Text> */}
+        </TouchableOpacity>
+
         <View style={styles.row}>
           <Text style={styles.question}> ¿Aún no tienes cuenta?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL("https://idforideas.com/emploid/")}
+          >
             <Text style={styles.text}> Suscríbete aquí</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.forgotPasswordContainer}>
-          <TouchableOpacity>
+          <Text style={styles.password}>
+            Por consultas contactarse a{" "}
+            <Text
+              style={styles.link}
+              onPress={() => Linking.openURL("mailto:diego@idforideas.com")}
+            >
+              diego@idforideas.com
+            </Text>
+          </Text>
+          {/* <TouchableOpacity>
             <Text style={styles.password}>¿Olvidaste tu contraseña?</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </React.Fragment>
@@ -70,16 +107,25 @@ const styles = StyleSheet.create({
     marginTop: height > 800 ? 50 : 20,
     ...Platform.select({
       web: {
-        width: width > 1024 ? "50%" : width > 768 ? "60%" : "70%", 
+        width: width > 1024 ? "50%" : width > 768 ? "60%" : "70%",
         marginTop: width > 1024 ? 50 : width > 768 ? 40 : 30,
-      }
-    })
+      },
+    }),
+  },
+  viewPassword: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  show: {
+    marginHorizontal: "85%",
+    position: "absolute",
+    top: 8,
   },
   button: {
     borderRadius: 20,
     paddingVertical: 8,
     justifyContent: "center",
-    alignItems:'center',
+    alignItems: "center",
     marginBottom: "7%",
     backgroundColor: "#fff",
     ...Platform.select({
@@ -94,9 +140,9 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#c30752",
     justifyContent: "center",
-    alignItems:'center',
+    alignItems: "center",
     fontWeight: "bold",
-    width: 100,
+
     ...Platform.select({
       web: {
         fontSize: 16,
@@ -107,10 +153,9 @@ const styles = StyleSheet.create({
     }),
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent:'center',
-   
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   question: {
     fontSize: 15,
@@ -124,21 +169,26 @@ const styles = StyleSheet.create({
   },
   forgotPasswordContainer: {
     marginTop: "auto",
-    alignItems: 'center',
-    justifyContent:'center',
+    alignItems: "center",
+    justifyContent: "center",
     ...Platform.select({
       web: {
         marginTop: "5%",
       },
       default: {
-        marginTop: height > 800 ? "35%" : "20%", 
+        marginTop: height > 800 ? "35%" : "20%",
       },
     }),
   },
   password: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 15,
+    textAlign: "center",
+  },
+  link: {
+    color: "blue",
+    textDecorationLine: "underline",
   },
 });
 export default SignIn;
